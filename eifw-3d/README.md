@@ -1,6 +1,6 @@
 # eIFW 3D
 
-Compare semi-implicit continuation forces and run cost. The mesh is not stored in this repository. Download it from the [Imperial College London Helix record](https://helix.imperial.ac.uk/records/tpapv-twz85) and save it as `mesh/eifw-3d.xml`. Place `restart_ctu_306.fld/` in this case directory, then run on compute nodes:
+Compare semi-implicit continuation forces and run cost. The mesh is not stored in this repository. Download it from the [Imperial College London Helix record](https://helix.imperial.ac.uk/records/tpapv-twz85) and save it as `mesh/eifw-3d.xml`. Place `restart_ctu_386.fld` in this case directory, then run on compute nodes:
 
 ```sh
 export NEKTAR_LEGACY_BIN=/path/to/IncNavierStokesSolver
