@@ -12,7 +12,6 @@ Run each case with the legacy `IncNavierStokesSolver`, the redesigned `IncNavier
 | [Taylor–Green vortex 3D](tgv-3d/README.md) | 262,144 hexahedra | Reference dissipation curve and runtime |
 | [NACA0012 3D](naca0012-3d/README.md) | 147,224 prisms + 412,934 tetrahedra | Startup force and field diagnostics; runtime |
 | [eIFW 3D](eifw-3d/README.md) | 418,084 prisms + 668,827 tetrahedra | Restarted wing forces and runtime |
-| [Full Imperial Front Wing 3D](fifw-3d/README.md) | 1,003,369 prisms + 1,600,112 tetrahedra | Full-wing forces and runtime |
 
 Counts refer to volume elements (area elements for 2D). Generated meshes use the build scripts' default settings.
 
