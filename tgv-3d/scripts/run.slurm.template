@@ -1,0 +1,43 @@
+#!/bin/bash
+#
+# Slurm job template for the Taylor-Green vortex validation benchmark.
+# Copy this file (e.g. to run.slurm), adjust the #SBATCH resource
+# directives for your allocation, and edit the "job configuration"
+# section below. No solver paths are hardcoded here -- they come from
+# env.sh. This is a genuinely expensive DNS case (100000 steps for the
+# full FinalTime=20 decay curve on 262144 elements); the existing
+# baseline case
+# runs it in ~2-CTU chunks restarted from checkpoint because every
+# segment observed there was killed by wall-clock limits -- plan for the
+# same chained-restart pattern here rather than expecting one job to
+# finish it (or use a truncated FinalTime, see ../README.md).
+
+#SBATCH --time=48:00:00
+#SBATCH --nodes=1
+#SBATCH --ntasks=48
+#SBATCH --mem=64G
+
+set -euo pipefail
+
+cd "$SLURM_SUBMIT_DIR"
+SCRIPTS_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# --- job configuration ---
+SOLVER=legacy             # legacy | semiimplicit | linearimplicit
+EXEC_SPACE=Serial         # Serial | AVX | Device (ignored for SOLVER=legacy)
+export MPI_NP="${SLURM_NTASKS:-1}"
+export MPI_LAUNCHER=mpirun
+# --------------------------
+
+source "$SCRIPTS_DIR/env.sh"
+
+echo "Node list: $SLURM_JOB_NODELIST"
+echo "Ranks: $MPI_NP"
+
+if [ "$SOLVER" = "legacy" ]; then
+    "$SCRIPTS_DIR/run_case.sh" --solver "$SOLVER" \
+        --outdir "$SLURM_SUBMIT_DIR/results/$SOLVER"
+else
+    "$SCRIPTS_DIR/run_case.sh" --solver "$SOLVER" --exec-space "$EXEC_SPACE" \
+        --outdir "$SLURM_SUBMIT_DIR/results/$SOLVER-$EXEC_SPACE"
+fi

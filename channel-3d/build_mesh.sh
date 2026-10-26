@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+# Build the 3D channel mesh and pair periodic faces.
+
+set -euo pipefail
+
+: "${GMSH_BIN:?Set GMSH_BIN to the path of the gmsh executable}"
+: "${NEKMESH_BIN:?Set NEKMESH_BIN to the path of the NekMesh executable}"
+
+GEO_FILE="${GEO_FILE:-channel3d.geo}"
+MSH_FILE="${MSH_FILE:-channel3d.msh}"
+RAW_XML="${RAW_XML:-channel3d-raw.xml}"
+XML_FILE="${XML_FILE:-channel3d.xml}"
+
+echo "Meshing $GEO_FILE -> $MSH_FILE"
+"$GMSH_BIN" -3 -nopopup "$GEO_FILE" -o "$MSH_FILE"
+
+echo "Converting $MSH_FILE -> $RAW_XML"
+"$NEKMESH_BIN" "$MSH_FILE" "$RAW_XML:xml:uncompress"
+
+echo "Pairing streamwise (x) and spanwise (z) faces as periodic -> $XML_FILE"
+"$NEKMESH_BIN" \
+    -m peralign:surf1=1:surf2=2:dir=x \
+    -m peralign:surf1=3:surf2=4:dir=z \
+    "$RAW_XML" "$XML_FILE:xml:uncompress"
+
+echo
+echo "Done: $XML_FILE"
+echo "Sanity check, e.g.:"
+echo "  grep -c '<H ID=' \"$XML_FILE\"   # expect 1078 hexahedra"

@@ -1,0 +1,40 @@
+#!/bin/bash
+#
+# Slurm job template for the channel-flow validation benchmark. Copy this
+# file (e.g. to run.slurm), adjust the #SBATCH resource directives for
+# your allocation, and edit the "job configuration" section below. No
+# solver paths are hardcoded here -- they come from env.sh (copied from
+# env.sh.example). This case is genuinely expensive (3D DNS);
+# segment and chain many segments together via restarts.
+
+#SBATCH --time=48:00:00
+#SBATCH --nodes=1
+#SBATCH --ntasks=20
+#SBATCH --mem=32G
+
+set -euo pipefail
+
+cd "$SLURM_SUBMIT_DIR"
+SCRIPTS_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# --- job configuration ---
+SOLVER=legacy             # legacy | semiimplicit
+EXEC_SPACE=Serial         # Serial | AVX | Device (ignored for SOLVER=legacy)
+NP="${SLURM_NTASKS:-1}"
+export MPI_LAUNCHER=mpirun
+# --------------------------
+
+source "$SCRIPTS_DIR/env.sh"
+
+echo "Node list: $SLURM_JOB_NODELIST"
+echo "Ranks: $NP"
+
+if [ "$SOLVER" = "legacy" ]; then
+    "$SCRIPTS_DIR/run_case.sh" --solver "$SOLVER" \
+        --np "$NP" \
+        --outdir "$SLURM_SUBMIT_DIR/results/$SOLVER"
+else
+    "$SCRIPTS_DIR/run_case.sh" --solver "$SOLVER" --exec-space "$EXEC_SPACE" \
+        --np "$NP" \
+        --outdir "$SLURM_SUBMIT_DIR/results/$SOLVER-$EXEC_SPACE"
+fi

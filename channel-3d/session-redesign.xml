@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<NEKTAR>
+
+    <EXPANSIONS>
+        <E COMPOSITE="C[7]" NUMMODES="9" FIELDS="u,v,w,p" TYPE="MODIFIED" />
+    </EXPANSIONS>
+
+    <CONDITIONS>
+        <SOLVERINFO>
+            <I PROPERTY="SolverType"           VALUE="VelocityCorrectionScheme" />
+            <I PROPERTY="EQTYPE"               VALUE="UnsteadyNavierStokes" />
+            <I PROPERTY="AdvectionForm"        VALUE="Convective" />
+            <I PROPERTY="Projection"           VALUE="Galerkin" />
+            <I PROPERTY="FORMULATION"          VALUE="semiimplicit" />
+            <I PROPERTY="SPECTRALHPDEALIASING" VALUE="True"/>
+        </SOLVERINFO>
+
+        <TIMEINTEGRATIONSCHEME>
+            <METHOD> IMEX </METHOD>
+            <ORDER> 2 </ORDER>
+        </TIMEINTEGRATIONSCHEME>
+
+        <PARAMETERS>
+            <P> TimeStep = 0.002           </P>
+            <P> StepsPerCTU = 500          </P>
+            <P> NumSteps = 150*StepsPerCTU </P>
+            <P> IO_CheckSteps = 5*StepsPerCTU </P>
+            <P> IO_InfoSteps = 100         </P>
+            <P> IO_CFLSteps = 10           </P>
+
+            <P> rho = 1.0                  </P>
+            <P> halfheight = 1.0           </P>
+            <P> Re_c = 4200.0              </P>
+            <P> Kinvis = halfheight/Re_c   </P>
+            <P> Re_tau = 180.0             </P>
+            <P> utau = Re_tau/Re_c         </P>
+
+            <P> Lx = 6.0                   </P>
+            <P> Ly = 2*halfheight          </P>
+            <P> Lz = 3.0                   </P>
+        </PARAMETERS>
+
+        <GLOBALSYSSOLNINFO>
+            <V VAR="u,v,w">
+                <I PROPERTY="IterativeSolverTolerance"  VALUE="1e-5"/>
+                <I PROPERTY="AbsoluteTolerance"         VALUE="True"/>
+            </V>
+            <V VAR="p">
+                <I PROPERTY="IterativeSolverTolerance"  VALUE="1e-5"/>
+                <I PROPERTY="AbsoluteTolerance"         VALUE="True"/>
+            </V>
+        </GLOBALSYSSOLNINFO>
+
+        <VARIABLES>
+            <V ID="0"> u </V>
+            <V ID="1"> v </V>
+            <V ID="2"> w </V>
+            <V ID="3"> p </V>
+        </VARIABLES>
+
+        <BOUNDARYREGIONS>
+            <B ID="0"> C[5-6] </B>
+            <B ID="1"> C[1] </B>
+            <B ID="2"> C[2] </B>
+            <B ID="3"> C[3] </B>
+            <B ID="4"> C[4] </B>
+        </BOUNDARYREGIONS>
+
+        <BOUNDARYCONDITIONS>
+            <REGION REF="0">
+                <D VAR="u" VALUE="0.0" />
+                <D VAR="v" VALUE="0.0" />
+                <D VAR="w" VALUE="0.0" />
+                <N VAR="p" USERDEFINEDTYPE="H" VALUE="0" />
+            </REGION>
+            <REGION REF="1">
+                <P VAR="u" VALUE="[2]" />
+                <P VAR="v" VALUE="[2]" />
+                <P VAR="w" VALUE="[2]" />
+                <P VAR="p" VALUE="[2]" />
+            </REGION>
+            <REGION REF="2">
+                <P VAR="u" VALUE="[1]" />
+                <P VAR="v" VALUE="[1]" />
+                <P VAR="w" VALUE="[1]" />
+                <P VAR="p" VALUE="[1]" />
+            </REGION>
+            <REGION REF="3">
+                <P VAR="u" VALUE="[4]" />
+                <P VAR="v" VALUE="[4]" />
+                <P VAR="w" VALUE="[4]" />
+                <P VAR="p" VALUE="[4]" />
+            </REGION>
+            <REGION REF="4">
+                <P VAR="u" VALUE="[3]" />
+                <P VAR="v" VALUE="[3]" />
+                <P VAR="w" VALUE="[3]" />
+                <P VAR="p" VALUE="[3]" />
+            </REGION>
+        </BOUNDARYCONDITIONS>
+
+        <FORCING>
+            <FORCE TYPE="Body">
+                <BODYFORCE> BodyForce </BODYFORCE>
+            </FORCE>
+        </FORCING>
+
+        <FUNCTION NAME="InitialConditions">
+            <E VAR="u" VALUE="y*(Ly-y)/(halfheight*halfheight) + 0.1*sin(2*PI*x/Lx)*sin(PI*y/Ly)*sin(2*PI*z/Lz)" />
+            <E VAR="v" VALUE="0.1*sin(2*PI*x/Lx)*sin(PI*y/Ly)*cos(2*PI*z/Lz)" />
+            <E VAR="w" VALUE="0.1*cos(2*PI*x/Lx)*sin(PI*y/Ly)*sin(2*PI*z/Lz)" />
+            <E VAR="p" VALUE="0.0" />
+        </FUNCTION>
+
+        <FUNCTION NAME="BodyForce">
+            <E VAR="u" VALUE="rho*utau*utau" />
+            <E VAR="v" VALUE="0.0" />
+            <E VAR="w" VALUE="0.0" />
+            <E VAR="p" VALUE="0.0" />
+        </FUNCTION>
+
+    </CONDITIONS>
+
+    <FILTERS>
+        <FILTER TYPE="AeroForces">
+            <PARAM NAME="OutputFile">DragLift</PARAM>
+            <PARAM NAME="OutputFrequency">1</PARAM>
+            <PARAM NAME="Boundary">B[0] </PARAM>
+        </FILTER>
+        <FILTER TYPE="Energy">
+            <PARAM NAME="OutputFrequency">1</PARAM>
+        </FILTER>
+        <FILTER TYPE="Mean">
+            <PARAM NAME="OutputFrequency">1</PARAM>
+        </FILTER>
+        <FILTER TYPE="ReynoldsStresses">
+            <PARAM NAME="OutputFile">reystress</PARAM>
+            <PARAM NAME="OutputFrequency">10*StepsPerCTU</PARAM>
+            <PARAM NAME="SampleFrequency">1</PARAM>
+        </FILTER>
+    </FILTERS>
+</NEKTAR>
