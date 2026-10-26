@@ -1,0 +1,153 @@
+<?xml version='1.0' encoding='utf-8'?>
+<NEKTAR>
+    <EXPANSIONS>
+        <E COMPOSITE="C[0]" BASISTYPE="Modified_A,Modified_A,Modified_B" NUMMODES="5,5,5" POINTSTYPE="GaussLobattoLegendre,GaussLobattoLegendre,GaussRadauMAlpha1Beta0" NUMPOINTS="7,7,6" FIELDS="u,v,w" />
+        <E COMPOSITE="C[0]" BASISTYPE="Modified_A,Modified_A,Modified_B" NUMMODES="5,5,5" POINTSTYPE="GaussLobattoLegendre,GaussLobattoLegendre,GaussRadauMAlpha1Beta0" NUMPOINTS="7,7,6" FIELDS="p" />
+        <E COMPOSITE="C[2]" BASISTYPE="Modified_A,Modified_B,Modified_C" NUMMODES="5,5,5" POINTSTYPE="GaussLobattoLegendre,GaussRadauMAlpha1Beta0,GaussRadauMAlpha2Beta0" NUMPOINTS="7,6,6" FIELDS="u,v,w" />
+        <E COMPOSITE="C[2]" BASISTYPE="Modified_A,Modified_B,Modified_C" NUMMODES="5,5,5" POINTSTYPE="GaussLobattoLegendre,GaussRadauMAlpha1Beta0,GaussRadauMAlpha2Beta0" NUMPOINTS="7,6,6" FIELDS="p" />
+    </EXPANSIONS>
+    <CONDITIONS>
+        <SOLVERINFO>
+            <I PROPERTY="SolverType" VALUE="VelocityCorrectionScheme" />
+            <I PROPERTY="EQTYPE" VALUE="UnsteadyNavierStokes" />
+            <I PROPERTY="Projection" VALUE="Galerkin" />
+            <I PROPERTY="SPECTRALHPDEALIASING" VALUE="True" />
+            <I PROPERTY="SpectralVanishingViscosity" VALUE="DGKernel" />
+            <I PROPERTY="EvolutionOperator" VALUE="Nonlinear" />
+            <I PROPERTY="Driver" VALUE="Standard" />
+        </SOLVERINFO>
+        <GLOBALSYSSOLNINFO>
+            <V VAR="u,v,w">
+                <I PROPERTY="Preconditioner" VALUE="LowEnergyBlock" />
+                <I PROPERTY="IterativeSolverTolerance" VALUE="1e-2" />
+                <I PROPERTY="AbsoluteTolerance" VALUE="True" />
+                <I PROPERTY="GlobalSysSoln" VALUE="IterativeStaticCond" />
+            </V>
+            <V VAR="p">
+                <I PROPERTY="Preconditioner" VALUE="Diagonal" />
+                <I PROPERTY="IterativeSolverTolerance" VALUE="1e-4" />
+                <I PROPERTY="AbsoluteTolerance" VALUE="True" />
+                <I PROPERTY="GlobalSysSoln" VALUE="IterativeStaticCond" />
+            </V>
+        </GLOBALSYSSOLNINFO>
+        <TIMEINTEGRATIONSCHEME>
+            <METHOD> IMEX </METHOD>
+            <ORDER> 2 </ORDER>
+        </TIMEINTEGRATIONSCHEME>
+        <PARAMETERS>
+            <P>    TimeStep        =  1e-05  </P>
+            <P>    Kinvis          =  1.448e-06  </P>
+            <P>    SVVDiffCoeff    =  0.4  </P>
+            <P>    StepsPerCTU     =  25000  </P>
+            <P>    NumSteps        =  8*StepsPerCTU  </P>
+            <P>    IO_InfoSteps    =  10  </P>
+            <P>    IO_CFLSteps     =  10  </P>
+        </PARAMETERS>
+        <VARIABLES>
+            <V ID="0">  u</V>
+            <V ID="1">  v</V>
+            <V ID="2">  w</V>
+            <V ID="3">  p</V>
+        </VARIABLES>
+        <BOUNDARYREGIONS>
+            <B ID="0"> C[9]</B>
+            <B ID="1"> C[5]</B>
+            <B ID="2"> C[4]</B>
+            <B ID="3"> C[3]</B>
+            <B ID="4"> C[7]</B>
+            <B ID="5"> C[8]</B>
+            <B ID="6"> C[12]</B>
+            <B ID="7"> C[10]</B>
+            <B ID="8"> C[6]</B>
+            <B ID="9"> C[11]</B>
+        </BOUNDARYREGIONS>
+        <BOUNDARYCONDITIONS>
+            <REGION REF="0">
+                <D VAR="u" VALUE="1.0" />
+                <D VAR="v" VALUE="0.0" />
+                <D VAR="w" VALUE="0.0" />
+                <N VAR="p" USERDEFINEDTYPE="H" VALUE="0" />
+            </REGION>
+            <REGION REF="1">
+                <D VAR="u" VALUE="0" />
+                <D VAR="v" VALUE="0" />
+                <D VAR="w" VALUE="0" />
+                <N VAR="p" USERDEFINEDTYPE="H" VALUE="0" />
+            </REGION>
+            <REGION REF="2">
+                <D VAR="u" VALUE="1.0" />
+                <D VAR="v" VALUE="0.0" />
+                <D VAR="w" VALUE="0.0" />
+                <N VAR="p" USERDEFINEDTYPE="H" VALUE="0" />
+            </REGION>
+            <REGION REF="3">
+                <D VAR="u" VALUE="1.0" />
+                <D VAR="v" VALUE="0.0" />
+                <D VAR="w" VALUE="0.0" />
+                <N VAR="p" USERDEFINEDTYPE="H" VALUE="0" />
+            </REGION>
+            <REGION REF="4">
+                <D VAR="u" VALUE="0" />
+                <D VAR="v" VALUE="0" />
+                <D VAR="w" VALUE="0" />
+                <N VAR="p" USERDEFINEDTYPE="H" VALUE="0" />
+            </REGION>
+            <REGION REF="5">
+                <N VAR="u" USERDEFINEDTYPE="HOutflow" VALUE="0" />
+                <N VAR="v" USERDEFINEDTYPE="HOutflow" VALUE="0" />
+                <N VAR="w" USERDEFINEDTYPE="HOutflow" VALUE="0" />
+                <D VAR="p" USERDEFINEDTYPE="HOutflow" VALUE="0" />
+            </REGION>
+            <REGION REF="6">
+                <N VAR="u" VALUE="0" />
+                <D VAR="v" VALUE="0" />
+                <N VAR="w" VALUE="0" />
+                <N VAR="p" USERDEFINEDTYPE="H" VALUE="0" />
+            </REGION>
+            <REGION REF="7">
+                <N VAR="u" VALUE="0" />
+                <D VAR="v" VALUE="0" />
+                <N VAR="w" VALUE="0" />
+                <N VAR="p" USERDEFINEDTYPE="H" VALUE="0" />
+            </REGION>
+            <REGION REF="8">
+                <D VAR="u" VALUE="0" />
+                <D VAR="v" VALUE="0" />
+                <D VAR="w" VALUE="0" />
+                <N VAR="p" USERDEFINEDTYPE="H" VALUE="0" />
+            </REGION>
+            <REGION REF="9">
+                <N VAR="u" VALUE="0" />
+                <N VAR="v" VALUE="0" />
+                <D VAR="w" VALUE="0" />
+                <N VAR="p" USERDEFINEDTYPE="H" VALUE="0" />
+            </REGION>
+        </BOUNDARYCONDITIONS>
+        <FUNCTION NAME="InitialConditions">
+            <F VAR="u,v,w" FILE="restart_ctu_306.fld" />
+            <E VAR="p" VALUE="0" />
+        </FUNCTION>
+    </CONDITIONS>
+    <FILTERS>
+        <FILTER TYPE="AeroForces">
+            <PARAM NAME="OutputFile">total.fce</PARAM>
+            <PARAM NAME="OutputFrequency">100</PARAM>
+            <PARAM NAME="Boundary">B[1,8,4]</PARAM>
+        </FILTER>
+        <FILTER TYPE="AeroForces">
+            <PARAM NAME="OutputFile">mainplane.fce</PARAM>
+            <PARAM NAME="OutputFrequency">100</PARAM>
+            <PARAM NAME="Boundary">B[1]</PARAM>
+        </FILTER>
+        <FILTER TYPE="AeroForces">
+            <PARAM NAME="OutputFile">flap1.fce</PARAM>
+            <PARAM NAME="OutputFrequency">100</PARAM>
+            <PARAM NAME="Boundary">B[8]</PARAM>
+        </FILTER>
+        <FILTER TYPE="AeroForces">
+            <PARAM NAME="OutputFile">flap2.fce</PARAM>
+            <PARAM NAME="OutputFrequency">100</PARAM>
+            <PARAM NAME="Boundary">B[4]</PARAM>
+        </FILTER>
+    </FILTERS>
+</NEKTAR>
