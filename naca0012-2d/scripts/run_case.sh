@@ -41,7 +41,7 @@ while [ $# -gt 0 ]; do
     esac
 done
 
-mesh="$CASE_ROOT/naca0012_bl_ho4_bl14.xml"
+mesh="$CASE_ROOT/mesh/naca0012_bl_ho4_bl14.xml"
 case "$solver" in
     legacy)
         session="$CASE_ROOT/session-legacy.xml"

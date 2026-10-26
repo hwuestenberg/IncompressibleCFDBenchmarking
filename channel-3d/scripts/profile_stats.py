@@ -43,7 +43,7 @@ Pipeline:
      against the Moser DNS profiles.
 
 Usage:
-    ./profile_stats.py --xml ../channel3d.xml \\
+    ./profile_stats.py --xml ../mesh/channel3d.xml \\
         --reystress-fld results/legacy/reystress_stress.fld \\
         --box 8,33,8 --plot profile.png
 
@@ -154,7 +154,7 @@ def main():
     p = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("--xml", required=True, type=Path,
-                    help="Mesh xml (channel3d.xml)")
+                    help="Mesh xml (mesh/channel3d.xml)")
     p.add_argument("--reystress-fld", required=True, type=Path,
                     help="ReynoldsStresses filter's final time-averaged "
                          "output (e.g. results/legacy/reystress_stress.fld "

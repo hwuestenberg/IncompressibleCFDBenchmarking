@@ -1,6 +1,6 @@
 # NACA0012 2D
 
-At Re=50,000 and 5° angle of attack, compare wing forces and fields between solvers and measure run cost. The mesh is included. Both solvers start from freestream (`u=uInf`, `v=vInf`, `p=0`). Run from this directory:
+At Re=50,000 and 5° angle of attack, compare wing forces and fields between solvers and measure run cost. The mesh is included in `mesh/`. Both solvers start from freestream (`u=uInf`, `v=vInf`, `p=0`). Run from this directory:
 
 ```sh
 cp scripts/env.sh.example scripts/env.sh  # edit paths, then source it

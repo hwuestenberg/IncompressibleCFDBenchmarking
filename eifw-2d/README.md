@@ -1,6 +1,6 @@
 # eIFW 2D
 
-At Re=220,000, compare startup wing forces between solvers and measure run cost. The mesh is included; set both solver paths and run:
+At Re=220,000, compare startup wing forces between solvers and measure run cost. The mesh is included in `mesh/`; set both solver paths and run:
 
 ```sh
 export NEKTAR_LEGACY_BIN=/path/to/IncNavierStokesSolver

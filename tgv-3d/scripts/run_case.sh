@@ -44,7 +44,7 @@ case "$solver" in
     *) echo "--solver must be 'legacy' or 'semiimplicit'" >&2; exit 1 ;;
 esac
 
-mesh="$CASE_ROOT/tgv-64.xml"
+mesh="$CASE_ROOT/mesh/tgv-64.xml"
 [ -f "$mesh" ] || {
     echo "Missing $mesh -- build it first with $CASE_ROOT/build_mesh.sh" >&2
     exit 1

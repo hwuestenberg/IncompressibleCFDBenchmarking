@@ -1,6 +1,6 @@
 # Taylor–Green vortex 3D
 
-At Re=1600, compare kinetic-energy dissipation with the included reference curve and time either solver. From this directory:
+At Re=1600, compare kinetic-energy dissipation with the included reference curve and time either solver. The build writes the mesh into `mesh/`. From this directory:
 
 ```sh
 ./build_mesh.sh

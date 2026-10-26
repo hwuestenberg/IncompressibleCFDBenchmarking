@@ -6,10 +6,12 @@ set -euo pipefail
 : "${GMSH_BIN:?Set GMSH_BIN to the path of the gmsh executable}"
 : "${NEKMESH_BIN:?Set NEKMESH_BIN to the path of the NekMesh executable}"
 
-GEO_FILE="${GEO_FILE:-channel3d.geo}"
-MSH_FILE="${MSH_FILE:-channel3d.msh}"
-RAW_XML="${RAW_XML:-channel3d-raw.xml}"
-XML_FILE="${XML_FILE:-channel3d.xml}"
+mesh_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/mesh"
+mkdir -p "$mesh_dir"
+GEO_FILE="${GEO_FILE:-$mesh_dir/channel3d.geo}"
+MSH_FILE="${MSH_FILE:-$mesh_dir/channel3d.msh}"
+RAW_XML="${RAW_XML:-$mesh_dir/channel3d-raw.xml}"
+XML_FILE="${XML_FILE:-$mesh_dir/channel3d.xml}"
 
 echo "Meshing $GEO_FILE -> $MSH_FILE"
 "$GMSH_BIN" -3 -nopopup "$GEO_FILE" -o "$MSH_FILE"

@@ -1,6 +1,6 @@
 # Channel 3D (Reτ=180)
 
-This case targets mean velocity and Reynolds-stress profiles at Reτ=180 and measures solver cost. From `channel-3d/`, build the mesh and run either or both semi-implicit legs:
+This case targets mean velocity and Reynolds-stress profiles at Reτ=180 and measures solver cost. From `channel-3d/`, build the mesh into `mesh/` and run either or both semi-implicit legs:
 
 ```sh
 ./build_mesh.sh

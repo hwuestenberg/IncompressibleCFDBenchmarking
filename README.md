@@ -15,7 +15,7 @@ Run each case with the legacy `IncNavierStokesSolver`, the redesigned `IncNavier
 
 Counts refer to volume elements (area elements for 2D). Generated meshes use the build scripts' default settings.
 
-Each case README gives the input and run commands. Case runners accept `--np` for MPI ranks and use `NEKTAR_LEGACY_BIN` and `NEKTAR_REDESIGN_BIN` for solver paths; set `NEKTAR_REDESIGN_DEVICE_BIN` when Device needs a separate build. Run a single leg when measuring one solver, or both legs under matching physics when comparing outputs. For performance, wrap each run command with `time` and record the solver commit/build, MPI ranks, execution space, time step, step count, wall time and hardware. Compare runs at the same workload and report CPU and GPU resource counts separately. Use compute nodes for large 3D cases. A comparison is a result only after the runs and their post-processing finish.
+Each case stores its mesh data in `mesh/`. Each case README gives the input and run commands. Case runners accept `--np` for MPI ranks and use `NEKTAR_LEGACY_BIN` and `NEKTAR_REDESIGN_BIN` for solver paths; set `NEKTAR_REDESIGN_DEVICE_BIN` when Device needs a separate build. Run a single leg when measuring one solver, or both legs under matching physics when comparing outputs. For performance, wrap each run command with `time` and record the solver commit/build, MPI ranks, execution space, time step, step count, wall time and hardware. Compare runs at the same workload and report CPU and GPU resource counts separately. Use compute nodes for large 3D cases. A comparison is a result only after the runs and their post-processing finish.
 
 ## Other formulations
 

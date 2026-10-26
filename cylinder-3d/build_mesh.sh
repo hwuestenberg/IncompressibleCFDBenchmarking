@@ -26,9 +26,11 @@ set -euo pipefail
 : "${GMSH_BIN:?Set GMSH_BIN to the path of the gmsh executable}"
 : "${NEKMESH_BIN:?Set NEKMESH_BIN to the path of the NekMesh executable}"
 
-GEO_FILE="${GEO_FILE:-cylinder3d.geo}"
-MSH_FILE="${MSH_FILE:-cylinder-3d.msh}"
-XML_FILE="${XML_FILE:-cylinder-3d.xml}"
+mesh_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/mesh"
+mkdir -p "$mesh_dir"
+GEO_FILE="${GEO_FILE:-$mesh_dir/cylinder3d.geo}"
+MSH_FILE="${MSH_FILE:-$mesh_dir/cylinder-3d.msh}"
+XML_FILE="${XML_FILE:-$mesh_dir/cylinder-3d.xml}"
 LZ="${LZ:-4.0}"
 LAYERS="${LAYERS:-40}"
 

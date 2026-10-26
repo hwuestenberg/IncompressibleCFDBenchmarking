@@ -23,13 +23,14 @@ set -euo pipefail
 : "${GMSH_BIN:?Set GMSH_BIN to the path of the gmsh executable}"
 : "${NEKMESH_BIN:?Set NEKMESH_BIN to the path of the NekMesh executable}"
 
-: "${SOURCE_GEO:?Set SOURCE_GEO to the path of the .geo file}"
-MSH_FILE="${MSH_FILE:-cylinder-2d.msh}"
-XML_FILE="${XML_FILE:-cylinder-2d.xml}"
+mesh_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/mesh"
+mkdir -p "$mesh_dir"
+SOURCE_GEO="${SOURCE_GEO:-$mesh_dir/dongCylinderFine.geo}"
+MSH_FILE="${MSH_FILE:-$mesh_dir/cylinder-2d.msh}"
+XML_FILE="${XML_FILE:-$mesh_dir/cylinder-2d.xml}"
 
 [ -f "$SOURCE_GEO" ] || {
-    echo "Source geometry not found: $SOURCE_GEO" >&2
-    echo "(override with SOURCE_GEO=... if it has moved)" >&2
+    echo "Geometry not found: $SOURCE_GEO" >&2
     exit 1
 }
 

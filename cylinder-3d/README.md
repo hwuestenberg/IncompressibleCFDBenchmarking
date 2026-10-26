@@ -1,6 +1,6 @@
 # Cylinder 3D
 
-At Re=300, compare the 3D wake forces and shedding frequency between solvers, or time either solver. No fixed literature acceptance range is supplied. From this directory:
+At Re=300, compare the 3D wake forces and shedding frequency between solvers, or time either solver. No fixed literature acceptance range is supplied. The build writes the mesh into `mesh/`. From this directory:
 
 ```sh
 ./build_mesh.sh

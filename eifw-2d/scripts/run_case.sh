@@ -45,5 +45,5 @@ fi
 printf 'Running %s, %s ranks, %s steps in %s\n' "$label" "$np" "$steps" "$outdir"
 (
     cd "$outdir"
-    "${launcher[@]}" "$bin" "$case_root/wing_geo_o5.xml" "$case_root/session-$solver.xml" "${extra[@]}" -P "NumSteps=$steps" -v >run.log 2>run.err
+    "${launcher[@]}" "$bin" "$case_root/mesh/wing_geo_o5.xml" "$case_root/session-$solver.xml" "${extra[@]}" -P "NumSteps=$steps" -v >run.log 2>run.err
 )
