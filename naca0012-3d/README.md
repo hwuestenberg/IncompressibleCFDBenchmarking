@@ -2,7 +2,7 @@
 
 At Re=50,000 and 5° angle of attack, compare startup force and field diagnostics between solvers and measure run cost. Place `naca0012-3d.xml` in `mesh/`.
 
-A [NACA0012 mesh-generation pipeline](https://github.com/hwuestenberg/nektar-star-pipeline) documents how to generate a 3D mesh. It produces `naca0012_periodic_full_p4_bl8.xml`; check its composite and boundary mappings, then name a compatible mesh `mesh/naca0012-3d.xml` for these sessions.
+The mesh is not stored in this repository. Generate it using the [NACA0012 mesh-generation pipeline](https://github.com/hwuestenberg/nektar-star-pipeline). It produces `naca0012_periodic_full_p4_bl8.xml`; check its composite and boundary mappings, then copy a compatible mesh to `mesh/naca0012-3d.xml` for these sessions.
 
 Both solvers start from freestream (`u=uInf`, `v=vInf`, `w=0`, `p=0`). Configure `scripts/env.sh` from `scripts/env.sh.example` with `NEKTAR_LEGACY_BIN`, `NEKTAR_REDESIGN_BIN` and, for Device, `NEKTAR_REDESIGN_DEVICE_BIN`. Then run one or both semi-implicit legs:
 
