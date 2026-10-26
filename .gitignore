@@ -14,11 +14,10 @@
 *.nekg
 *.msh
 *-raw.xml
-/channel-3d/ret180/channel3d.xml
+/channel-3d/channel3d.xml
 /cylinder-2d/cylinder-2d.xml
 /cylinder-3d/cylinder-3d.xml
 /naca0012-3d/NACA0012_new2_ho4_bl14_align.xml
-/naca0012-3d/NACA0012_new2_ho4_bl14_align.opt
 /tgv-3d/tgv-*.xml
 *.log
 *.err
@@ -30,9 +29,4 @@ __pycache__/
 
 # Internal investigation notes and machine-specific reports.
 /cylinder-2d/reports/
-/channel-3d/ret395/
-/naca0012-3d/coord/
-/naca0012-3d/report/
-/naca0012-3d/HANDOVER.md
-/naca0012-3d/long-run.sh
 /tgv-3d/inSituAnimationHandover.md
