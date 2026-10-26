@@ -21,13 +21,13 @@ if [[ "$solver" == legacy ]]; then
     : "${NEKTAR_LEGACY_BIN:?Set NEKTAR_LEGACY_BIN}"
     bin="$NEKTAR_LEGACY_BIN"; extra=(); label="legacy-$formulation"
 else
-    : "${NEKTAR_REDESIGN_BIN:?Set NEKTAR_REDESIGN_BIN}"
-    bin="$NEKTAR_REDESIGN_BIN"
     case "$exec_space" in
-        Serial|AVX) impl=StdMat;;
-        Device) impl=SumFacTOP;;
+        Serial) bin="${NEKTAR_REDESIGN_SERIAL_BIN:-${NEKTAR_REDESIGN_BIN:-}}"; impl=StdMat;;
+        AVX) bin="${NEKTAR_REDESIGN_AVX_BIN:-${NEKTAR_REDESIGN_BIN:-}}"; impl=StdMat;;
+        Device) bin="${NEKTAR_REDESIGN_DEVICE_BIN:-${NEKTAR_REDESIGN_BIN:-}}"; impl=SumFacTOP;;
         *) echo 'Use --exec-space Serial|AVX|Device' >&2; exit 2;;
     esac
+    [[ -n "$bin" ]] || { echo 'Set NEKTAR_REDESIGN_BIN or a space-specific binary' >&2; exit 2; }
     extra=("--opExecSpace=$exec_space" "--opImpl=$impl")
     label="redesign-$formulation-$exec_space"
 fi
