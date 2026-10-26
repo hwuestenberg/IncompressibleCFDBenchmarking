@@ -11,3 +11,5 @@ python3 scripts/compare_forces.py results --exec-space Serial
 ```
 
 Run either leg alone for a cost measurement, or use `scripts/run_all.sh` to run both and compare four force histories. The redesign currently stops on the mixed-velocity `H` boundary, so there is no paired result. This short startup run has no literature target. Time individual `run_case.sh` legs for performance.
+
+Note this is the 2D baseline geometry for the work 2.5D simulations in "Large Eddy Simulation of an Inverted Multi-element Wing in Ground Effect", James Slaughter, David Moxey and Spencer Sherwin, 2023.
