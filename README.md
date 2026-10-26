@@ -5,7 +5,7 @@ Run each case with the legacy `IncNavierStokesSolver`, the redesigned `IncNavier
 | Case | Mesh elements by shape type | What it tests |
 |---|---:|---|
 | [Cylinder 2D](cylinder-2d/README.md) | 2,880 quadrilaterals | Schäfer–Turek drag, lift and shedding; runtime |
-| [NACA0012 2D](naca0012-2d/README.md) | 12,521 triangles + 1,974 quadrilaterals | Force and field agreement; runtime |
+| [NACA0012 2D](naca0012-2d/README.md) | 12,521 triangles + 1,974 quadrilaterals | Startup force and field agreement; runtime |
 | [eIFW 2D](eifw-2d/README.md) | 67,946 triangles + 3,015 quadrilaterals | Wing startup forces and runtime |
 | [Channel 3D](channel-3d/README.md) | 1,078 hexahedra | Moser channel DNS profiles and runtime |
 | [Cylinder 3D](cylinder-3d/README.md) | 115,200 hexahedra | 3D wake agreement and runtime |
@@ -16,8 +16,8 @@ Run each case with the legacy `IncNavierStokesSolver`, the redesigned `IncNavier
 
 Counts refer to volume elements (area elements for 2D). Generated meshes use the build scripts' default settings.
 
-Each case README gives the input and run commands. Run a single leg when measuring one solver, or both legs under matching physics when comparing outputs. For performance, wrap each run command with `time` and record the solver commit/build, MPI ranks, execution space, time step, step count, wall time and hardware. Compare runs at the same workload and report CPU and GPU resource counts separately. Use compute nodes for large 3D cases. A comparison is a result only after the runs and their post-processing finish.
+Each case README gives the input and run commands. Case runners accept `--np` for MPI ranks and use `NEKTAR_LEGACY_BIN` and `NEKTAR_REDESIGN_BIN` for solver paths; set `NEKTAR_REDESIGN_DEVICE_BIN` when Device needs a separate build. Run a single leg when measuring one solver, or both legs under matching physics when comparing outputs. For performance, wrap each run command with `time` and record the solver commit/build, MPI ranks, execution space, time step, step count, wall time and hardware. Compare runs at the same workload and report CPU and GPU resource counts separately. Use compute nodes for large 3D cases. A comparison is a result only after the runs and their post-processing finish.
 
 ## Other formulations
 
-Each case contains one legacy and one redesign semi-implicit session. Velocity and pressure use equal expansion order, and each solver pair uses matching reporting intervals. The legacy sessions use `SolverType=VelocityCorrectionScheme`; redesign uses `FORMULATION=semiimplicit`. For a separate linear-implicit study, select legacy `SolverType=VCSImplicit` and redesign `FORMULATION=linearimplicit`. Redesign also provides `PressureFormulation=Strong` and `PressureFormulation=Weak`. Choose the pressure form explicitly and recheck stability and accuracy at the selected time step.
+Each case contains `session-legacy.xml` and `session-redesign.xml` for the semi-implicit comparison. Velocity and pressure use equal expansion order, and each solver pair uses matching reporting intervals. The legacy sessions use `SolverType=VelocityCorrectionScheme`; redesign uses `FORMULATION=semiimplicit`. For a separate linear-implicit study, select legacy `SolverType=VCSImplicit` and redesign `FORMULATION=linearimplicit`. Redesign also provides `PressureFormulation=Strong` and `PressureFormulation=Weak`. Choose the pressure form explicitly and recheck stability and accuracy at the selected time step.
