@@ -14,10 +14,10 @@ Run each case with the legacy `IncNavierStokesSolver`, the redesigned `IncNavier
 | [eIFW 3D](eifw-3d/README.md) | 418,084 prisms + 668,827 tetrahedra | Restarted wing forces and runtime |
 | [Full Imperial Front Wing 3D](fifw-3d/README.md) | 1,003,369 prisms + 1,600,112 tetrahedra | Full-wing forces and runtime |
 
-Counts refer to volume elements (area elements for 2D). Generated meshes use the build scripts' default settings; counts for supplied compressed meshes use their recorded inventories.
+Counts refer to volume elements (area elements for 2D). Generated meshes use the build scripts' default settings.
 
 Each case README gives the input and run commands. Run a single leg when measuring one solver, or both legs under matching physics when comparing outputs. For performance, wrap each run command with `time` and record the solver commit/build, MPI ranks, execution space, time step, step count, wall time and hardware. Compare runs at the same workload and report CPU and GPU resource counts separately. Use compute nodes for large 3D cases. A comparison is a result only after the runs and their post-processing finish.
 
 ## Other formulations
 
-The active legacy sessions use `SolverType=VelocityCorrectionScheme`; redesign uses `FORMULATION=semiimplicit`. For a separate linear-implicit study, select legacy `SolverType=VCSImplicit` and redesign `FORMULATION=linearimplicit`. Redesign also provides `PressureFormulation=Strong` and `PressureFormulation=Weak`. Choose the pressure form explicitly and recheck stability and accuracy at the selected time step. Earlier linear-implicit sessions remain in some case directories as reference material; the documented run paths use semi-implicit stepping.
+Each case contains one legacy and one redesign semi-implicit session. Velocity and pressure use equal expansion order, and each solver pair uses matching reporting intervals. The legacy sessions use `SolverType=VelocityCorrectionScheme`; redesign uses `FORMULATION=semiimplicit`. For a separate linear-implicit study, select legacy `SolverType=VCSImplicit` and redesign `FORMULATION=linearimplicit`. Redesign also provides `PressureFormulation=Strong` and `PressureFormulation=Weak`. Choose the pressure form explicitly and recheck stability and accuracy at the selected time step.
