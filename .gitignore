@@ -16,8 +16,6 @@
 /channel-3d/mesh/channel-3d.xml
 /cylinder-2d/mesh/cylinder-2d.xml
 /cylinder-3d/mesh/cylinder-3d.xml
-/eifw-3d/mesh/eifw-3d.xml
-/naca0012-3d/mesh/naca0012-3d.xml
 /tgv-3d/mesh/tgv-3d.xml
 *.log
 *.err
