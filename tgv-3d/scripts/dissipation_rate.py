@@ -32,11 +32,11 @@ just numerical noise, so this is reported for every run rather than
 silently discarded.
 
 Usage:
-    ./dissipation_rate.py --legacy-eny ../legacy-run/tgv-64.eny \\
-        --redesign-eny ../redesign-run/tgv-64.eny \\
+    ./dissipation_rate.py --legacy-eny ../legacy-run/tgv-3d.eny \\
+        --redesign-eny ../redesign-run/tgv-3d.eny \\
         --redesign-label semiimplicit-Serial --plot dissipation.png
 
-    ./dissipation_rate.py --legacy-eny ../legacy-run/tgv-64.eny --plot dissipation.png
+    ./dissipation_rate.py --legacy-eny ../legacy-run/tgv-3d.eny --plot dissipation.png
         (reference + legacy only, no redesign leg)
 
 Requires: numpy. matplotlib only if --plot is given.
@@ -112,10 +112,10 @@ def main():
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("--legacy-eny", type=Path, default=None,
                     help="Legacy Energy-filter .eny output "
-                         "(e.g. results/legacy/tgv-64.eny)")
+                         "(e.g. results/legacy/tgv-3d.eny)")
     p.add_argument("--redesign-eny", type=Path, default=None,
                     help="Redesign Energy-filter .eny output "
-                         "(e.g. results/semiimplicit-Serial/tgv-64.eny)")
+                         "(e.g. results/semiimplicit-Serial/tgv-3d.eny)")
     p.add_argument("--redesign-label", default="redesign",
                     help="Label for the --redesign-eny series in "
                          "output/plot (e.g. 'semiimplicit-Serial')")

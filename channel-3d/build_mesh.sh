@@ -8,10 +8,10 @@ set -euo pipefail
 
 mesh_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/mesh"
 mkdir -p "$mesh_dir"
-GEO_FILE="${GEO_FILE:-$mesh_dir/channel3d.geo}"
-MSH_FILE="${MSH_FILE:-$mesh_dir/channel3d.msh}"
-RAW_XML="${RAW_XML:-$mesh_dir/channel3d-raw.xml}"
-XML_FILE="${XML_FILE:-$mesh_dir/channel3d.xml}"
+GEO_FILE="${GEO_FILE:-$mesh_dir/channel-3d.geo}"
+MSH_FILE="${MSH_FILE:-$mesh_dir/channel-3d.msh}"
+RAW_XML="${RAW_XML:-$mesh_dir/channel-3d-raw.xml}"
+XML_FILE="${XML_FILE:-$mesh_dir/channel-3d.xml}"
 
 echo "Meshing $GEO_FILE -> $MSH_FILE"
 "$GMSH_BIN" -3 -nopopup "$GEO_FILE" -o "$MSH_FILE"

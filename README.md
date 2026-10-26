@@ -15,7 +15,28 @@ Run each case with the legacy `IncNavierStokesSolver`, the redesigned `IncNavier
 
 Counts refer to volume elements (area elements for 2D). Generated meshes use the build scripts' default settings.
 
-Each case stores its mesh data in `mesh/`. Each case README gives the input and run commands. Case runners accept `--np` for MPI ranks and use `NEKTAR_LEGACY_BIN` and `NEKTAR_REDESIGN_BIN` for solver paths; set `NEKTAR_REDESIGN_DEVICE_BIN` when Device needs a separate build. Run a single leg when measuring one solver, or both legs under matching physics when comparing outputs. For performance, wrap each run command with `time` and record the solver commit/build, MPI ranks, execution space, time step, step count, wall time and hardware. Compare runs at the same workload and report CPU and GPU resource counts separately. Use compute nodes for large 3D cases. A comparison is a result only after the runs and their post-processing finish.
+## Mesh generation
+
+The cylinder 2D, cylinder 3D, channel 3D and Taylor–Green vortex 3D cases include Gmsh geometry and build scripts. Install Gmsh and Docker, then run this setup from the repository root. The helper runs NekMesh with the official [Nektar++ `latest` image](https://hub.docker.com/r/nektarpp/nektar/tags), mounting this repository so generated files remain in each case's `mesh/` directory.
+
+```sh
+docker pull nektarpp/nektar:latest
+export GMSH_BIN="$(command -v gmsh)"
+export NEKMESH_BIN="$PWD/scripts/nekmesh-docker.sh"
+```
+
+Run the build script in the desired case directory; each script supplies its own Gmsh dimension and any NekMesh periodic alignment:
+
+```sh
+(cd cylinder-2d && ./build_mesh_2d.sh)
+(cd cylinder-3d && ./build_mesh.sh)
+(cd channel-3d && ./build_mesh.sh)
+(cd tgv-3d && ./build_mesh.sh)
+```
+
+For a local NekMesh installation, set `NEKMESH_BIN` to its executable path instead. Other cases use an included mesh or require one to be placed in `mesh/`, as stated in their case READMEs.
+
+Each case stores its primary geometry and final mesh in `mesh/` with the case directory name as the filename stem (for example, `cylinder-3d/mesh/cylinder-3d.geo` and `cylinder-3d/mesh/cylinder-3d.xml`). Each case README gives the input and run commands. Case runners accept `--np` for MPI ranks and use `NEKTAR_LEGACY_BIN` and `NEKTAR_REDESIGN_BIN` for solver paths; set `NEKTAR_REDESIGN_DEVICE_BIN` when Device needs a separate build. Run a single leg when measuring one solver, or both legs under matching physics when comparing outputs. For performance, wrap each run command with `time` and record the solver commit/build, MPI ranks, execution space, time step, step count, wall time and hardware. Compare runs at the same workload and report CPU and GPU resource counts separately. Use compute nodes for large 3D cases. A comparison is a result only after the runs and their post-processing finish.
 
 ## Other formulations
 

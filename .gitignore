@@ -1,10 +1,9 @@
 # Local inputs, results and machine-specific settings.
 /eifw-3d/mesh_ctu_386.fld
 /eifw-3d/source/
-/fifw-3d/mesh/rig.nekg
+/fifw-3d/mesh/fifw-3d.nekg
 /fifw-3d/restart.fld/
 /fifw-3d/source/
-/naca0012-2d/naca0012_bl_ho4_bl14_ini.fld/
 /naca0012-2d/results/
 **/scripts/env.sh
 **/results/
@@ -14,12 +13,12 @@
 *.nekg
 *.msh
 *-raw.xml
-/channel-3d/mesh/channel3d.xml
+/channel-3d/mesh/channel-3d.xml
 /cylinder-2d/mesh/cylinder-2d.xml
 /cylinder-3d/mesh/cylinder-3d.xml
-/eifw-3d/mesh/mesh.xml
-/naca0012-3d/mesh/NACA0012_new2_ho4_bl14_align.xml
-/tgv-3d/mesh/tgv-*.xml
+/eifw-3d/mesh/eifw-3d.xml
+/naca0012-3d/mesh/naca0012-3d.xml
+/tgv-3d/mesh/tgv-3d.xml
 *.log
 *.err
 *.chk/

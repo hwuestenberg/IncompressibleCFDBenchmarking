@@ -7,7 +7,7 @@
 // used in *-session.xml.
 
 // Override from the command line with, e.g.:
-//   gmsh -3 -setnumber Lz 6.0 -setnumber nLayers 48 mesh/cylinder3d.geo -o mesh/cylinder-3d.msh
+//   gmsh -3 -setnumber Lz 6.0 -setnumber nLayers 48 mesh/cylinder-3d.geo -o mesh/cylinder-3d.msh
 If (!Exists(Lz))
     Lz = 4.0;
 EndIf

@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 #
 # Build the 3D cylinder mesh for the Re=300 redesign-validation benchmark
-# directly from cylinder3d.geo (a standalone gmsh source: the 2D
+# directly from cylinder-3d.geo (a standalone gmsh source: the 2D
 # dongCylinderFine geometry, extruded natively in gmsh along the spanwise
 # direction with Physical Volume/Surface tags already assigned -- no
 # NekMesh extrude/peralign post-processing needed, and no composite-ID
 # guesswork: the physical tags were verified against the mesh's own
-# geometry with gmsh's Python API when cylinder3d.geo was written (see
+# geometry with gmsh's Python API when cylinder-3d.geo was written (see
 # comments in that file), and match *-session.xml's
 # BOUNDARYREGIONS directly:
 #   C[1]=domain  C[2]=inflow    C[3]=outflow  C[4]=bottom(farfield)
@@ -28,7 +28,7 @@ set -euo pipefail
 
 mesh_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/mesh"
 mkdir -p "$mesh_dir"
-GEO_FILE="${GEO_FILE:-$mesh_dir/cylinder3d.geo}"
+GEO_FILE="${GEO_FILE:-$mesh_dir/cylinder-3d.geo}"
 MSH_FILE="${MSH_FILE:-$mesh_dir/cylinder-3d.msh}"
 XML_FILE="${XML_FILE:-$mesh_dir/cylinder-3d.xml}"
 LZ="${LZ:-4.0}"

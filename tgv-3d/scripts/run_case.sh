@@ -44,7 +44,7 @@ case "$solver" in
     *) echo "--solver must be 'legacy' or 'semiimplicit'" >&2; exit 1 ;;
 esac
 
-mesh="$CASE_ROOT/mesh/tgv-64.xml"
+mesh="$CASE_ROOT/mesh/tgv-3d.xml"
 [ -f "$mesh" ] || {
     echo "Missing $mesh -- build it first with $CASE_ROOT/build_mesh.sh" >&2
     exit 1
@@ -94,7 +94,7 @@ fi
 )
 
 echo "   done -- see $outdir/run.log, run.err"
-echo "   tgv-64.eny has the Time/KineticEnergy/Enstrophy series (both legacy"
+echo "   tgv-3d.eny has the Time/KineticEnergy/Enstrophy series (both legacy"
 echo "   and redesign use the Energy filter -- see ../README.md); Nektar"
 echo "   names filter output after the first/mesh xml's basename. Compare"
 echo "   with ../scripts/dissipation_rate.py."

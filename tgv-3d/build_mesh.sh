@@ -8,11 +8,11 @@ set -euo pipefail
 
 mesh_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/mesh"
 mkdir -p "$mesh_dir"
-GEO_FILE="${GEO_FILE:-$mesh_dir/tgv.geo}"
+GEO_FILE="${GEO_FILE:-$mesh_dir/tgv-3d.geo}"
 N="${N:-64}"
-MSH_FILE="${MSH_FILE:-$mesh_dir/tgv-${N}.msh}"
-RAW_XML="${RAW_XML:-$mesh_dir/tgv-${N}-raw.xml}"
-XML_FILE="${XML_FILE:-$mesh_dir/tgv-${N}.xml}"
+MSH_FILE="${MSH_FILE:-$mesh_dir/tgv-3d.msh}"
+RAW_XML="${RAW_XML:-$mesh_dir/tgv-3d-raw.xml}"
+XML_FILE="${XML_FILE:-$mesh_dir/tgv-3d.xml}"
 
 echo "Meshing $GEO_FILE -> $MSH_FILE (N=$N per direction, N^3=$((N*N*N)) elements)"
 "$GMSH_BIN" -3 -setnumber N "$N" -nopopup "$GEO_FILE" -o "$MSH_FILE"
@@ -29,6 +29,6 @@ echo "Pairing x/y/z faces as periodic -> $XML_FILE"
 
 echo
 echo "Done: $XML_FILE"
-echo "The runner uses mesh/tgv-64.xml; rebuild with N=64 for the default case."
+echo "The runner uses mesh/tgv-3d.xml; the default case uses N=64."
 echo "Sanity check, e.g.:"
 echo "  grep -c '<H ID=' \"$XML_FILE\"   # expect $((N*N*N)) hexahedra"

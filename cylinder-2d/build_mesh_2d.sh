@@ -25,7 +25,7 @@ set -euo pipefail
 
 mesh_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/mesh"
 mkdir -p "$mesh_dir"
-SOURCE_GEO="${SOURCE_GEO:-$mesh_dir/dongCylinderFine.geo}"
+SOURCE_GEO="${SOURCE_GEO:-$mesh_dir/cylinder-2d.geo}"
 MSH_FILE="${MSH_FILE:-$mesh_dir/cylinder-2d.msh}"
 XML_FILE="${XML_FILE:-$mesh_dir/cylinder-2d.xml}"
 
@@ -35,7 +35,7 @@ XML_FILE="${XML_FILE:-$mesh_dir/cylinder-2d.xml}"
 }
 
 echo "Meshing $SOURCE_GEO -> $MSH_FILE"
-"$GMSH_BIN" -2 "$SOURCE_GEO" -o "$MSH_FILE"
+"$GMSH_BIN" -2 -format msh2 "$SOURCE_GEO" -o "$MSH_FILE"
 
 echo "Converting $MSH_FILE -> $XML_FILE"
 "$NEKMESH_BIN" "$MSH_FILE" "$XML_FILE:xml:uncompress"
