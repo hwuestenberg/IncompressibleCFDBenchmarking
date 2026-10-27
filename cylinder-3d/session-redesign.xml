@@ -25,7 +25,6 @@
             <P> NumSteps       = FinalTime/TimeStep </P>
             <P> IO_InfoSteps   = 400             </P>
             <P> IO_CFLSteps    = 400             </P>
-            <P> IO_CheckSteps  = 20000           </P>
             <P> Re             = 300             </P>
             <P> Kinvis         = 1/Re            </P>
             <P> Lz             = 4.0             </P>
@@ -121,6 +120,10 @@
         <FILTER TYPE="Energy">
             <PARAM NAME="OutputFile">EnergyFile</PARAM>
             <PARAM NAME="OutputFrequency">100</PARAM>
+        </FILTER>
+        <FILTER TYPE="Checkpoint">
+            <PARAM NAME="OutputFile">cylinder-3d</PARAM>
+            <PARAM NAME="OutputFrequency">10</PARAM>
         </FILTER>
     </FILTERS>
 </NEKTAR>

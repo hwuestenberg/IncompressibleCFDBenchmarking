@@ -97,7 +97,7 @@
     <FILTERS>
         <FILTER TYPE="Checkpoint">
             <PARAM NAME="OutputFile">state</PARAM>
-            <PARAM NAME="OutputFrequency">5*StepsPerCTU</PARAM>
+            <PARAM NAME="OutputFrequency">10</PARAM>
         </FILTER>
 
         <FILTER TYPE="AeroForces">

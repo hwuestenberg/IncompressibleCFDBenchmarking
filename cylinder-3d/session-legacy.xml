@@ -11,9 +11,13 @@
             <I PROPERTY="EQTYPE"                VALUE="UnsteadyNavierStokes"     />
             <I PROPERTY="EvolutionOperator"     VALUE="Nonlinear"                />
             <I PROPERTY="Projection"            VALUE="Galerkin"                 />
-            <I PROPERTY="TimeIntegrationMethod" VALUE="IMEXOrder2"               />
             <I PROPERTY="Driver"                VALUE="Standard"                 />
         </SOLVERINFO>
+
+        <TIMEINTEGRATIONSCHEME>
+            <METHOD> IMEX </METHOD>
+            <ORDER> 2 </ORDER>
+        </TIMEINTEGRATIONSCHEME>
 
         <PARAMETERS>
             <P> TimeStep       = 0.0025         </P>
@@ -21,7 +25,6 @@
             <P> NumSteps       = FinalTime/TimeStep </P>
             <P> IO_InfoSteps   = 400             </P>
             <P> IO_CFLSteps    = 400             </P>
-            <P> IO_CheckSteps  = 20000           </P>
             <P> Re             = 300             </P>
             <P> Kinvis         = 1/Re            </P>
             <P> Lz             = 4.0             </P>
@@ -121,6 +124,10 @@
         <FILTER TYPE="Energy">
             <PARAM NAME="OutputFile">EnergyFile</PARAM>
             <PARAM NAME="OutputFrequency">100</PARAM>
+        </FILTER>
+        <FILTER TYPE="Checkpoint">
+            <PARAM NAME="OutputFile">cylinder-3d</PARAM>
+            <PARAM NAME="OutputFrequency">10</PARAM>
         </FILTER>
     </FILTERS>
 </NEKTAR>

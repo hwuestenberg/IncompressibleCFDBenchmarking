@@ -42,16 +42,12 @@
             <P> vInf        = UInf*sin(alpha)          </P>
             <P> Re          = 5e4                      </P>
             <P> Kinvis      = UInf*LenWing/Re          </P>
-            <P> U0_HighOrderBC    = 1.0                </P>
-            <P> Delta_HighOrderBC = 0.05               </P>
-            <P> OutflowBC_theta   = 1.0                </P>
             <P> CTU         = 1.0                      </P>
             <P> StepsPerCTU = floor(LenWing/TimeStep + 0.5) </P>
             <P> T           = 100*CTU                  </P>
             <P> NumSteps    = floor(T/TimeStep + 0.5)  </P>
             <P> IO_InfoSteps = 1                       </P>
             <P> IO_CFLSteps  = 1                       </P>
-            <P> FastInitialCondition = 1               </P>
             <P> FceSteps        = 1                    </P>
             <P> HisSteps        = 1                    </P>
             <P> EnergySteps     = StepsPerCTU/250      </P>
@@ -221,7 +217,7 @@
         </FILTER>
         <FILTER TYPE="Checkpoint">
             <PARAM NAME="OutputFile">chk</PARAM>
-            <PARAM NAME="OutputFrequency">ChkSteps</PARAM>
+            <PARAM NAME="OutputFrequency">10</PARAM>
         </FILTER>
     </FILTERS>
 </NEKTAR>

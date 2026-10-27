@@ -58,11 +58,7 @@
             <P> IO_InfoSteps    = 10                 </P>
             <P> IO_CFLSteps     = 1                  </P>
             <P> CheckAbortSteps = StepsPerCTU/250    </P>
-            <P> CFL             = 1.0                </P>
 
-            <P> U0_HighOrderBC    = 1.0  </P>
-            <P> Delta_HighOrderBC = 0.05 </P>
-            <P> OutflowBC_theta   = 1.0  </P>
         </PARAMETERS>
 
         <VARIABLES>
@@ -111,7 +107,7 @@
     <FILTERS>
         <FILTER TYPE="Checkpoint">
             <PARAM NAME="OutputFile"> state </PARAM>
-            <PARAM NAME="OutputFrequency"> 5*StepsPerCTU </PARAM>
+            <PARAM NAME="OutputFrequency">10</PARAM>
         </FILTER>
 
         <FILTER TYPE="AeroForces">

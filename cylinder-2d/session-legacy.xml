@@ -4,7 +4,7 @@
     <EXPANSIONS>
         <E COMPOSITE="C[1]" BASISTYPE="Modified_A,Modified_A" NUMMODES="7,7"
            POINTSTYPE="GaussLobattoLegendre,GaussLobattoLegendre"
-           NUMPOINTS="11,11" FIELDS="u,v,p" />
+           NUMPOINTS="8,8" FIELDS="u,v,p" />
     </EXPANSIONS>
 
     <CONDITIONS>
@@ -27,7 +27,6 @@
             <P> NumSteps       = FinalTime/TimeStep </P>
             <P> IO_InfoSteps   = 200             </P>
             <P> IO_CFLSteps    = 200             </P>
-            <P> IO_CheckSteps  = 10000           </P>
             <P> Re             = 100             </P>
             <P> Kinvis         = 1/Re            </P>
         </PARAMETERS>
@@ -92,7 +91,7 @@
         <FUNCTION NAME="InitialConditions">
             <E VAR="u" VALUE="1.0" />
             <E VAR="v" VALUE="0.0" />
-            <E VAR="p" VALUE="awgn(0.01)" />
+            <E VAR="p" VALUE="0" />
         </FUNCTION>
     </CONDITIONS>
 
@@ -105,6 +104,10 @@
         <FILTER TYPE="Energy">
             <PARAM NAME="OutputFile">EnergyFile</PARAM>
             <PARAM NAME="OutputFrequency">50</PARAM>
+        </FILTER>
+        <FILTER TYPE="Checkpoint">
+            <PARAM NAME="OutputFile">cylinder-2d</PARAM>
+            <PARAM NAME="OutputFrequency">10</PARAM>
         </FILTER>
     </FILTERS>
 </NEKTAR>

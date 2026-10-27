@@ -27,7 +27,6 @@
             <P> NumSteps       = FinalTime/TimeStep </P>
             <P> IO_InfoSteps   = 100           </P>
             <P> IO_CFLSteps    = 10            </P>
-            <P> IO_CheckSteps  = 5*StepsPerCTU </P>
 
             <P> Re             = 1600          </P>
             <P> Kinvis         = 1/Re          </P>
@@ -112,6 +111,10 @@
     <FILTERS>
         <FILTER TYPE="Energy">
             <PARAM NAME="OutputFrequency">1</PARAM>
+        </FILTER>
+        <FILTER TYPE="Checkpoint">
+            <PARAM NAME="OutputFile">tgv-3d</PARAM>
+            <PARAM NAME="OutputFrequency">10</PARAM>
         </FILTER>
     </FILTERS>
 </NEKTAR>

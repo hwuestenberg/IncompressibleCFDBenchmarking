@@ -23,7 +23,6 @@
             <P> TimeStep = 0.002           </P>
             <P> StepsPerCTU = 500          </P>
             <P> NumSteps = 150*StepsPerCTU </P>
-            <P> IO_CheckSteps = 5*StepsPerCTU </P>
             <P> IO_InfoSteps = 100         </P>
             <P> IO_CFLSteps = 10           </P>
 
@@ -140,6 +139,10 @@
             <PARAM NAME="OutputFile">reystress</PARAM>
             <PARAM NAME="OutputFrequency">10*StepsPerCTU</PARAM>
             <PARAM NAME="SampleFrequency">1</PARAM>
+        </FILTER>
+        <FILTER TYPE="Checkpoint">
+            <PARAM NAME="OutputFile">channel-3d</PARAM>
+            <PARAM NAME="OutputFrequency">10</PARAM>
         </FILTER>
     </FILTERS>
 </NEKTAR>
