@@ -1,24 +1,18 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <NEKTAR>
-
     <EXPANSIONS>
-        <E COMPOSITE="C[1]" NUMMODES="5" TYPE="MODIFIED" FIELDS="u,v,w,p" />
+        <E COMPOSITE="C[1]" NUMMODES="5" TYPE="MODIFIED" FIELDS="u,v,w,p"/>
     </EXPANSIONS>
-
     <CONDITIONS>
         <SOLVERINFO>
-            <I PROPERTY="SolverType"            VALUE="VelocityCorrectionScheme" />
-            <I PROPERTY="EQTYPE"                VALUE="UnsteadyNavierStokes"     />
-            <I PROPERTY="EvolutionOperator"     VALUE="Nonlinear"                />
-            <I PROPERTY="Projection"            VALUE="Galerkin"                 />
-            <I PROPERTY="Driver"                VALUE="Standard"                 />
+            <I PROPERTY="Projection" VALUE="Galerkin"/>
+            <I PROPERTY="EQTYPE" VALUE="UnsteadyNavierStokes"/>
+            <I PROPERTY="SolverType" VALUE="VelocityCorrectionScheme"/>
         </SOLVERINFO>
-
         <TIMEINTEGRATIONSCHEME>
             <METHOD> IMEX </METHOD>
             <ORDER> 2 </ORDER>
         </TIMEINTEGRATIONSCHEME>
-
         <PARAMETERS>
             <P> TimeStep       = 0.0025         </P>
             <P> FinalTime      = 400.0          </P>
@@ -29,29 +23,26 @@
             <P> Kinvis         = 1/Re            </P>
             <P> Lz             = 4.0             </P>
         </PARAMETERS>
-
         <GLOBALSYSSOLNINFO>
             <V VAR="u,v,w">
-                <I PROPERTY="GlobalSysSoln"            VALUE="IterativeStaticCond" />
-                <I PROPERTY="Preconditioner"           VALUE="LowEnergyBlock"      />
-                <I PROPERTY="IterativeSolverTolerance" VALUE="1e-8"                />
-                <I PROPERTY="AbsoluteTolerance"        VALUE="True"                />
+                <I PROPERTY="GlobalSysSoln" VALUE="IterativeStaticCond"/>
+                <I PROPERTY="Preconditioner" VALUE="LowEnergyBlock"/>
+                <I PROPERTY="IterativeSolverTolerance" VALUE="1e-8"/>
+                <I PROPERTY="AbsoluteTolerance" VALUE="True"/>
             </V>
             <V VAR="p">
-                <I PROPERTY="GlobalSysSoln"            VALUE="IterativeStaticCond" />
-                <I PROPERTY="Preconditioner"           VALUE="Diagonal"            />
-                <I PROPERTY="IterativeSolverTolerance" VALUE="1e-8"                />
-                <I PROPERTY="AbsoluteTolerance"        VALUE="True"                />
+                <I PROPERTY="GlobalSysSoln" VALUE="IterativeStaticCond"/>
+                <I PROPERTY="Preconditioner" VALUE="Diagonal"/>
+                <I PROPERTY="IterativeSolverTolerance" VALUE="1e-8"/>
+                <I PROPERTY="AbsoluteTolerance" VALUE="True"/>
             </V>
         </GLOBALSYSSOLNINFO>
-
         <VARIABLES>
             <V ID="0"> u </V>
             <V ID="1"> v </V>
             <V ID="2"> w </V>
             <V ID="3"> p </V>
         </VARIABLES>
-
         <BOUNDARYREGIONS>
             <B ID="0"> C[6] </B>
             <B ID="1"> C[4] </B>
@@ -61,60 +52,57 @@
             <B ID="5"> C[7] </B>
             <B ID="6"> C[8] </B>
         </BOUNDARYREGIONS>
-
         <BOUNDARYCONDITIONS>
             <REGION REF="0">
-                <D VAR="u" VALUE="0" />
-                <D VAR="v" VALUE="0" />
-                <D VAR="w" VALUE="0" />
-                <N VAR="p" USERDEFINEDTYPE="H" VALUE="0" />
+                <D VAR="u" VALUE="0"/>
+                <D VAR="v" VALUE="0"/>
+                <D VAR="w" VALUE="0"/>
+                <N VAR="p" USERDEFINEDTYPE="H" VALUE="0"/>
             </REGION>
             <REGION REF="1">
-                <N VAR="u" VALUE="0" />
-                <D VAR="v" VALUE="0" />
-                <N VAR="w" VALUE="0" />
-                <N VAR="p" USERDEFINEDTYPE="H" VALUE="0" />
+                <N VAR="u" VALUE="0"/>
+                <D VAR="v" VALUE="0"/>
+                <N VAR="w" VALUE="0"/>
+                <N VAR="p" USERDEFINEDTYPE="H" VALUE="0"/>
             </REGION>
             <REGION REF="2">
-                <N VAR="u" USERDEFINEDTYPE="HOutflow" VALUE="0" />
-                <N VAR="v" USERDEFINEDTYPE="HOutflow" VALUE="0" />
-                <N VAR="w" USERDEFINEDTYPE="HOutflow" VALUE="0" />
-                <D VAR="p" USERDEFINEDTYPE="HOutflow" VALUE="0" />
+                <N VAR="u" USERDEFINEDTYPE="HOutflow" VALUE="0"/>
+                <N VAR="v" USERDEFINEDTYPE="HOutflow" VALUE="0"/>
+                <N VAR="w" USERDEFINEDTYPE="HOutflow" VALUE="0"/>
+                <D VAR="p" USERDEFINEDTYPE="HOutflow" VALUE="0"/>
             </REGION>
             <REGION REF="3">
-                <D VAR="u" VALUE="1" />
-                <D VAR="v" VALUE="0" />
-                <D VAR="w" VALUE="0" />
-                <N VAR="p" USERDEFINEDTYPE="H" VALUE="0" />
+                <D VAR="u" VALUE="1"/>
+                <D VAR="v" VALUE="0"/>
+                <D VAR="w" VALUE="0"/>
+                <N VAR="p" USERDEFINEDTYPE="H" VALUE="0"/>
             </REGION>
             <REGION REF="4">
-                <N VAR="u" VALUE="0" />
-                <D VAR="v" VALUE="0" />
-                <N VAR="w" VALUE="0" />
-                <N VAR="p" USERDEFINEDTYPE="H" VALUE="0" />
+                <N VAR="u" VALUE="0"/>
+                <D VAR="v" VALUE="0"/>
+                <N VAR="w" VALUE="0"/>
+                <N VAR="p" USERDEFINEDTYPE="H" VALUE="0"/>
             </REGION>
             <REGION REF="5">
-                <P VAR="u" VALUE="[6]" />
-                <P VAR="v" VALUE="[6]" />
-                <P VAR="w" VALUE="[6]" />
-                <P VAR="p" VALUE="[6]" />
+                <P VAR="u" VALUE="[6]"/>
+                <P VAR="v" VALUE="[6]"/>
+                <P VAR="w" VALUE="[6]"/>
+                <P VAR="p" VALUE="[6]"/>
             </REGION>
             <REGION REF="6">
-                <P VAR="u" VALUE="[5]" />
-                <P VAR="v" VALUE="[5]" />
-                <P VAR="w" VALUE="[5]" />
-                <P VAR="p" VALUE="[5]" />
+                <P VAR="u" VALUE="[5]"/>
+                <P VAR="v" VALUE="[5]"/>
+                <P VAR="w" VALUE="[5]"/>
+                <P VAR="p" VALUE="[5]"/>
             </REGION>
         </BOUNDARYCONDITIONS>
-
         <FUNCTION NAME="InitialConditions">
-            <E VAR="u" VALUE="1.0" />
-            <E VAR="v" VALUE="0.01*sin(2*PI*z/Lz)" />
-            <E VAR="w" VALUE="0.01*sin(2*PI*z/Lz)" />
-            <E VAR="p" VALUE="0.0" />
+            <E VAR="u" VALUE="1.0"/>
+            <E VAR="v" VALUE="0.01*sin(2*PI*z/Lz)"/>
+            <E VAR="w" VALUE="0.01*sin(2*PI*z/Lz)"/>
+            <E VAR="p" VALUE="0.0"/>
         </FUNCTION>
     </CONDITIONS>
-
     <FILTERS>
         <FILTER TYPE="AeroForces">
             <PARAM NAME="OutputFile">DragLift</PARAM>

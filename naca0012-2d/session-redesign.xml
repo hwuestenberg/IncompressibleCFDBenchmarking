@@ -1,115 +1,91 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <NEKTAR>
     <EXPANSIONS>
-        <E COMPOSITE="C[100,101,102]" NUMMODES="7" TYPE="MODIFIED" FIELDS="u,v,p" />
+        <E COMPOSITE="C[100,101,102]" NUMMODES="7" TYPE="MODIFIED" FIELDS="u,v,p"/>
     </EXPANSIONS>
-
     <CONDITIONS>
         <SOLVERINFO>
-            <I PROPERTY="SolverType"    VALUE="VelocityCorrectionScheme" />
-            <I PROPERTY="EQTYPE"        VALUE="UnsteadyNavierStokes"     />
-            <I PROPERTY="AdvectionForm" VALUE="Convective"               />
-            <I PROPERTY="Projection"    VALUE="Galerkin"                 />
-            <I PROPERTY="FORMULATION"   VALUE="semiimplicit"           />
-            <I PROPERTY="SPECTRALHPDEALIASING" VALUE="True"              />
+            <I PROPERTY="Projection" VALUE="Galerkin"/>
+            <I PROPERTY="EQTYPE" VALUE="UnsteadyNavierStokes"/>
+            <I PROPERTY="SolverType" VALUE="VelocityCorrectionScheme"/>
+            <I PROPERTY="FORMULATION" VALUE="semiimplicit"/>
+            <I PROPERTY="SPECTRALHPDEALIASING" VALUE="True"/>
         </SOLVERINFO>
-
         <GLOBALSYSSOLNINFO>
             <V VAR="u,v">
-                <I PROPERTY="Preconditioner"           VALUE="Diagonal"     />
-                <I PROPERTY="IterativeSolverTolerance" VALUE="1e-2"     />
-                <I PROPERTY="NekLinSysMaxIterations"   VALUE="5000"     />
-                <I PROPERTY="AbsoluteTolerance"        VALUE="True"     />
-                <I PROPERTY="LinSysRightPrecon"        VALUE="True"     />
-                <I PROPERTY="FlexibleGMRES"            VALUE="False"    />
-                <I PROPERTY="LinSysMaxStorage"         VALUE="100"      />
+                <I PROPERTY="Preconditioner" VALUE="Diagonal"/>
+                <I PROPERTY="IterativeSolverTolerance" VALUE="1e-2"/>
+                <I PROPERTY="AbsoluteTolerance" VALUE="True"/>
             </V>
             <V VAR="p">
-                <I PROPERTY="Preconditioner"           VALUE="Diagonal" />
-                <I PROPERTY="IterativeSolverTolerance" VALUE="1e-4"     />
-                <I PROPERTY="NekLinSysMaxIterations"   VALUE="5000"     />
-                <I PROPERTY="AbsoluteTolerance"        VALUE="True"     />
-                <I PROPERTY="LinSysLeftPrecon"         VALUE="True"     />
-                <I PROPERTY="LinSysRightPrecon"        VALUE="False"    />
-                <I PROPERTY="FlexibleConjugateGradient" VALUE="False"   />
+                <I PROPERTY="Preconditioner" VALUE="Diagonal"/>
+                <I PROPERTY="IterativeSolverTolerance" VALUE="1e-4"/>
+                <I PROPERTY="AbsoluteTolerance" VALUE="True"/>
             </V>
         </GLOBALSYSSOLNINFO>
-
         <TIMEINTEGRATIONSCHEME>
             <METHOD> IMEX </METHOD>
             <ORDER> 2 </ORDER>
         </TIMEINTEGRATIONSCHEME>
-
         <PARAMETERS>
-            <P> LenWing = 1.0            </P>
-            <P> UInf    = 1.0            </P>
-            <P> alpha   = 5.0*PI/180     </P>
-            <P> uInf    = UInf*cos(alpha) </P>
-            <P> vInf    = UInf*sin(alpha) </P>
-            <P> Re      = 50000          </P>
-            <P> Kinvis  = UInf*LenWing/Re </P>
-
-            <P> TimeStep    = 2e-6         </P>
-            <P> CTU         = 1.0          </P>
-            <P> T           = 100 * CTU                     </P>
-            <P> NumSteps    = ceil(T/TimeStep)              </P>
-            <P> StepsPerCTU = ceil(LenWing / TimeStep)      </P>
-
-            <P> IO_InfoSteps    = 10                 </P>
-            <P> IO_CFLSteps     = 1                  </P>
-            <P> CheckAbortSteps = StepsPerCTU/250    </P>
-
+            <P> TimeStep              = 2.0e-6                    </P>
+            <P> CTU                   = 1.0                    </P>
+            <P> T                     = 100 * CTU                     </P>
+            <P> NumSteps              = ceil(T/TimeStep)              </P>
+            <P> StepsPerCTU           = ceil(LenWing / TimeStep)      </P>
+            <P> LenWing               = 1                          </P>
+            <P> IO_InfoSteps          = 10                     </P>
+            <P> IO_CFLSteps           = 1                      </P>
+            <P> Re                    = 5e4                     </P>
+            <P> Kinvis                = 1/Re                    </P>
+            <P> alpha           = 5.0 * PI/180 </P>
+            <P> uInf = 1.0 * cos(alpha) </P>
+            <P> vInf = 1.0 * sin(alpha) </P>
         </PARAMETERS>
-
         <VARIABLES>
             <V ID="0"> u </V>
             <V ID="1"> v </V>
             <V ID="2"> p </V>
         </VARIABLES>
-
         <BOUNDARYREGIONS>
             <B ID="0" NAME="Wall">     C[1] </B>
             <B ID="1" NAME="Farfield"> C[4] </B>
             <B ID="2" NAME="Outflow">  C[3] </B>
             <B ID="3" NAME="CutTE">    C[2] </B>
         </BOUNDARYREGIONS>
-
         <BOUNDARYCONDITIONS>
             <REGION REF="0">
-                <D VAR="u" VALUE="0" />
-                <D VAR="v" VALUE="0" />
-                <N VAR="p" USERDEFINEDTYPE="H" VALUE="0" />
+                <D VAR="u" VALUE="0"/>
+                <D VAR="v" VALUE="0"/>
+                <N VAR="p" USERDEFINEDTYPE="H" VALUE="0"/>
             </REGION>
             <REGION REF="1">
-                <D VAR="u" VALUE="uInf" />
-                <D VAR="v" VALUE="vInf" />
-                <N VAR="p" USERDEFINEDTYPE="H" VALUE="0" />
+                <D VAR="u" VALUE="uInf"/>
+                <D VAR="v" VALUE="vInf"/>
+                <N VAR="p" USERDEFINEDTYPE="H" VALUE="0"/>
             </REGION>
-			<REGION REF="2">
-                <N VAR="u" USERDEFINEDTYPE="HOutflow" VALUE="0" />
-                <N VAR="v" USERDEFINEDTYPE="HOutflow" VALUE="0" />
-                <D VAR="p" USERDEFINEDTYPE="HOutflow" VALUE="0" />
+            <REGION REF="2">
+                <N VAR="u" USERDEFINEDTYPE="HOutflow" VALUE="0"/>
+                <N VAR="v" USERDEFINEDTYPE="HOutflow" VALUE="0"/>
+                <D VAR="p" USERDEFINEDTYPE="HOutflow" VALUE="0"/>
             </REGION>
             <REGION REF="3">
-                <D VAR="u" VALUE="0" />
-                <D VAR="v" VALUE="0" />
-                <N VAR="p" USERDEFINEDTYPE="H" VALUE="0" />
+                <D VAR="u" VALUE="0"/>
+                <D VAR="v" VALUE="0"/>
+                <N VAR="p" USERDEFINEDTYPE="H" VALUE="0"/>
             </REGION>
         </BOUNDARYCONDITIONS>
-
         <FUNCTION NAME="InitialConditions">
-            <E VAR="u" VALUE="uInf" />
-            <E VAR="v" VALUE="vInf" />
-            <E VAR="p" VALUE="0" />
+            <E VAR="u" VALUE="uInf"/>
+            <E VAR="v" VALUE="vInf"/>
+            <E VAR="p" VALUE="0"/>
         </FUNCTION>
     </CONDITIONS>
-
     <FILTERS>
         <FILTER TYPE="Checkpoint">
             <PARAM NAME="OutputFile"> state </PARAM>
             <PARAM NAME="OutputFrequency">10</PARAM>
         </FILTER>
-
         <FILTER TYPE="AeroForces">
             <PARAM NAME="OutputFile"> total.fce </PARAM>
             <PARAM NAME="OutputFrequency"> 1 </PARAM>
@@ -118,13 +94,11 @@
             <PARAM NAME="Direction2"> -sin(alpha) cos(alpha)  0 </PARAM>
             <PARAM NAME="PivotPoint"> 0.25 0 0 </PARAM>
         </FILTER>
-
         <FILTER TYPE="ReynoldsStresses">
             <PARAM NAME="OutputFile"> mean_fields.fld </PARAM>
             <PARAM NAME="OutputFrequency"> 5*StepsPerCTU </PARAM>
             <PARAM NAME="SampleFrequency"> StepsPerCTU/250 </PARAM>
         </FILTER>
-
         <FILTER TYPE="Energy">
             <PARAM NAME="OutputFile"> EnergyFile </PARAM>
             <PARAM NAME="OutputFrequency"> StepsPerCTU/25 </PARAM>

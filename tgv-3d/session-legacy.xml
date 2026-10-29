@@ -1,24 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <NEKTAR>
-
     <EXPANSIONS>
-        <E COMPOSITE="C[7]" NUMMODES="4" FIELDS="u,v,w,p" TYPE="MODIFIED" />
+        <E COMPOSITE="C[7]" NUMMODES="4" FIELDS="u,v,w,p" TYPE="MODIFIED"/>
     </EXPANSIONS>
-
     <CONDITIONS>
         <SOLVERINFO>
-            <I PROPERTY="SolverType"           VALUE="VelocityCorrectionScheme" />
-            <I PROPERTY="EqType"               VALUE="UnsteadyNavierStokes" />
-            <I PROPERTY="AdvectionForm"        VALUE="Convective" />
-            <I PROPERTY="Projection"           VALUE="Galerkin" />
-            <I PROPERTY="SpectralHPDealiasing" VALUE="True" />
+            <I PROPERTY="Projection" VALUE="Galerkin"/>
+            <I PROPERTY="EqType" VALUE="UnsteadyNavierStokes"/>
+            <I PROPERTY="SolverType" VALUE="VelocityCorrectionScheme"/>
+            <I PROPERTY="SpectralHPDealiasing" VALUE="True"/>
         </SOLVERINFO>
-
         <TIMEINTEGRATIONSCHEME>
             <METHOD> IMEX </METHOD>
             <ORDER> 2 </ORDER>
         </TIMEINTEGRATIONSCHEME>
-
         <PARAMETERS>
             <P> TimeStep       = 0.0002        </P>
             <P> StepsPerCTU    = 1/TimeStep    </P>
@@ -26,35 +21,31 @@
             <P> NumSteps       = FinalTime/TimeStep </P>
             <P> IO_InfoSteps   = 100           </P>
             <P> IO_CFLSteps    = 10            </P>
-
             <P> Re             = 1600          </P>
             <P> Kinvis         = 1/Re          </P>
             <P> V0             = 1             </P>
             <P> L              = 1             </P>
         </PARAMETERS>
-
         <GLOBALSYSSOLNINFO>
             <V VAR="u,v,w">
-                <I PROPERTY="GlobalSysSoln"             VALUE="IterativeStaticCond"/>
-                <I PROPERTY="Preconditioner"            VALUE="LowEnergyBlock"/>
-                <I PROPERTY="IterativeSolverTolerance"  VALUE="1e-8"/>
-                <I PROPERTY="AbsoluteTolerance"         VALUE="True"/>
+                <I PROPERTY="GlobalSysSoln" VALUE="IterativeStaticCond"/>
+                <I PROPERTY="Preconditioner" VALUE="LowEnergyBlock"/>
+                <I PROPERTY="IterativeSolverTolerance" VALUE="1e-8"/>
+                <I PROPERTY="AbsoluteTolerance" VALUE="True"/>
             </V>
             <V VAR="p">
-                <I PROPERTY="GlobalSysSoln"             VALUE="IterativeStaticCond"/>
-                <I PROPERTY="Preconditioner"            VALUE="Diagonal"/>
-                <I PROPERTY="IterativeSolverTolerance"  VALUE="1e-8"/>
-                <I PROPERTY="AbsoluteTolerance"         VALUE="True"/>
+                <I PROPERTY="GlobalSysSoln" VALUE="IterativeStaticCond"/>
+                <I PROPERTY="Preconditioner" VALUE="Diagonal"/>
+                <I PROPERTY="IterativeSolverTolerance" VALUE="1e-8"/>
+                <I PROPERTY="AbsoluteTolerance" VALUE="True"/>
             </V>
         </GLOBALSYSSOLNINFO>
-
         <VARIABLES>
             <V ID="0"> u </V>
             <V ID="1"> v </V>
             <V ID="2"> w </V>
             <V ID="3"> p </V>
         </VARIABLES>
-
         <BOUNDARYREGIONS>
             <B ID="0"> C[1] </B>
             <B ID="1"> C[2] </B>
@@ -63,54 +54,51 @@
             <B ID="4"> C[5] </B>
             <B ID="5"> C[6] </B>
         </BOUNDARYREGIONS>
-
         <BOUNDARYCONDITIONS>
             <REGION REF="0">
-                <P VAR="u" VALUE="[5]" />
-                <P VAR="v" VALUE="[5]" />
-                <P VAR="w" VALUE="[5]" />
-                <P VAR="p" VALUE="[5]" />
+                <P VAR="u" VALUE="[5]"/>
+                <P VAR="v" VALUE="[5]"/>
+                <P VAR="w" VALUE="[5]"/>
+                <P VAR="p" VALUE="[5]"/>
             </REGION>
             <REGION REF="1">
-                <P VAR="u" VALUE="[3]" />
-                <P VAR="v" VALUE="[3]" />
-                <P VAR="w" VALUE="[3]" />
-                <P VAR="p" VALUE="[3]" />
+                <P VAR="u" VALUE="[3]"/>
+                <P VAR="v" VALUE="[3]"/>
+                <P VAR="w" VALUE="[3]"/>
+                <P VAR="p" VALUE="[3]"/>
             </REGION>
             <REGION REF="2">
-                <P VAR="u" VALUE="[4]" />
-                <P VAR="v" VALUE="[4]" />
-                <P VAR="w" VALUE="[4]" />
-                <P VAR="p" VALUE="[4]" />
+                <P VAR="u" VALUE="[4]"/>
+                <P VAR="v" VALUE="[4]"/>
+                <P VAR="w" VALUE="[4]"/>
+                <P VAR="p" VALUE="[4]"/>
             </REGION>
             <REGION REF="3">
-                <P VAR="u" VALUE="[1]" />
-                <P VAR="v" VALUE="[1]" />
-                <P VAR="w" VALUE="[1]" />
-                <P VAR="p" VALUE="[1]" />
+                <P VAR="u" VALUE="[1]"/>
+                <P VAR="v" VALUE="[1]"/>
+                <P VAR="w" VALUE="[1]"/>
+                <P VAR="p" VALUE="[1]"/>
             </REGION>
             <REGION REF="4">
-                <P VAR="u" VALUE="[2]" />
-                <P VAR="v" VALUE="[2]" />
-                <P VAR="w" VALUE="[2]" />
-                <P VAR="p" VALUE="[2]" />
+                <P VAR="u" VALUE="[2]"/>
+                <P VAR="v" VALUE="[2]"/>
+                <P VAR="w" VALUE="[2]"/>
+                <P VAR="p" VALUE="[2]"/>
             </REGION>
             <REGION REF="5">
-                <P VAR="u" VALUE="[0]" />
-                <P VAR="v" VALUE="[0]" />
-                <P VAR="w" VALUE="[0]" />
-                <P VAR="p" VALUE="[0]" />
+                <P VAR="u" VALUE="[0]"/>
+                <P VAR="v" VALUE="[0]"/>
+                <P VAR="w" VALUE="[0]"/>
+                <P VAR="p" VALUE="[0]"/>
             </REGION>
         </BOUNDARYCONDITIONS>
-
         <FUNCTION NAME="InitialConditions">
-            <E VAR="u" VALUE="V0*sin(x/L)*cos(y/L)*cos(z/L)" />
-            <E VAR="v" VALUE="-V0*cos(x/L)*sin(y/L)*cos(z/L)" />
-            <E VAR="w" VALUE="0" />
-            <E VAR="p" VALUE="0" />
+            <E VAR="u" VALUE="V0*sin(x/L)*cos(y/L)*cos(z/L)"/>
+            <E VAR="v" VALUE="-V0*cos(x/L)*sin(y/L)*cos(z/L)"/>
+            <E VAR="w" VALUE="0"/>
+            <E VAR="p" VALUE="0"/>
         </FUNCTION>
     </CONDITIONS>
-
     <FILTERS>
         <FILTER TYPE="Energy">
             <PARAM NAME="OutputFrequency">1</PARAM>

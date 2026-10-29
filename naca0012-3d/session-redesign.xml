@@ -1,32 +1,28 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <NEKTAR>
     <EXPANSIONS>
-        <E COMPOSITE="C[0,2]" NUMMODES="3" TYPE="MODIFIED" FIELDS="u,v,w,p" />
+        <E COMPOSITE="C[0,2]" NUMMODES="3" TYPE="MODIFIED" FIELDS="u,v,w,p"/>
     </EXPANSIONS>
     <CONDITIONS>
         <SOLVERINFO>
-            <I PROPERTY="SolverType" VALUE="VelocityCorrectionScheme" />
-            <I PROPERTY="EQTYPE" VALUE="UnsteadyNavierStokes" />
-            <I PROPERTY="AdvectionForm" VALUE="Convective" />
-            <I PROPERTY="Projection" VALUE="Galerkin" />
-            <I PROPERTY="FORMULATION" VALUE="semiimplicit" />
-            <I PROPERTY="SPECTRALHPDEALIASING" VALUE="True" />
+            <I PROPERTY="Projection" VALUE="Galerkin"/>
+            <I PROPERTY="EQTYPE" VALUE="UnsteadyNavierStokes"/>
+            <I PROPERTY="SolverType" VALUE="VelocityCorrectionScheme"/>
+            <I PROPERTY="FORMULATION" VALUE="semiimplicit"/>
+            <I PROPERTY="SPECTRALHPDEALIASING" VALUE="True"/>
         </SOLVERINFO>
         <GLOBALSYSSOLNINFO>
             <V VAR="u,v,w">
-                <I PROPERTY="Preconditioner" VALUE="Diagonal" />
-                <I PROPERTY="IterativeSolverTolerance" VALUE="1e-2" />
-                <I PROPERTY="AbsoluteTolerance" VALUE="True" />
-                <I PROPERTY="NekLinSysMaxIterations" VALUE="5000" />
+                <I PROPERTY="Preconditioner" VALUE="Diagonal"/>
+                <I PROPERTY="IterativeSolverTolerance" VALUE="1e-2"/>
+                <I PROPERTY="AbsoluteTolerance" VALUE="True"/>
+                <I PROPERTY="NekLinSysMaxIterations" VALUE="5000"/>
             </V>
             <V VAR="p">
-                <I PROPERTY="Preconditioner" VALUE="Diagonal" />
-                <I PROPERTY="IterativeSolverTolerance" VALUE="1e-4" />
-                <I PROPERTY="AbsoluteTolerance" VALUE="True" />
-                <I PROPERTY="NekLinSysMaxIterations" VALUE="5000" />
-                <I PROPERTY="LinSysLeftPrecon" VALUE="True" />
-                <I PROPERTY="LinSysRightPrecon" VALUE="False" />
-                <I PROPERTY="FlexibleConjugateGradient" VALUE="False" />
+                <I PROPERTY="Preconditioner" VALUE="Diagonal"/>
+                <I PROPERTY="IterativeSolverTolerance" VALUE="1e-4"/>
+                <I PROPERTY="AbsoluteTolerance" VALUE="True"/>
+                <I PROPERTY="NekLinSysMaxIterations" VALUE="5000"/>
             </V>
         </GLOBALSYSSOLNINFO>
         <TIMEINTEGRATIONSCHEME>
@@ -73,53 +69,53 @@
         </BOUNDARYREGIONS>
         <BOUNDARYCONDITIONS>
             <REGION REF="0">
-                <D VAR="u" VALUE="0" />
-                <D VAR="v" VALUE="0" />
-                <D VAR="w" VALUE="0" />
-                <N VAR="p" USERDEFINEDTYPE="H" VALUE="0" />
+                <D VAR="u" VALUE="0"/>
+                <D VAR="v" VALUE="0"/>
+                <D VAR="w" VALUE="0"/>
+                <N VAR="p" USERDEFINEDTYPE="H" VALUE="0"/>
             </REGION>
             <REGION REF="1">
-                <N VAR="u" USERDEFINEDTYPE="HOutflow" VALUE="0" />
-                <N VAR="v" USERDEFINEDTYPE="HOutflow" VALUE="0" />
-                <N VAR="w" USERDEFINEDTYPE="HOutflow" VALUE="0" />
-                <D VAR="p" USERDEFINEDTYPE="HOutflow" VALUE="0" />
+                <N VAR="u" USERDEFINEDTYPE="HOutflow" VALUE="0"/>
+                <N VAR="v" USERDEFINEDTYPE="HOutflow" VALUE="0"/>
+                <N VAR="w" USERDEFINEDTYPE="HOutflow" VALUE="0"/>
+                <D VAR="p" USERDEFINEDTYPE="HOutflow" VALUE="0"/>
             </REGION>
             <REGION REF="2">
-                <P VAR="u" VALUE="[3]" />
-                <P VAR="v" VALUE="[3]" />
-                <P VAR="w" VALUE="[3]" />
-                <P VAR="p" VALUE="[3]" />
+                <P VAR="u" VALUE="[3]"/>
+                <P VAR="v" VALUE="[3]"/>
+                <P VAR="w" VALUE="[3]"/>
+                <P VAR="p" VALUE="[3]"/>
             </REGION>
             <REGION REF="3">
-                <P VAR="u" VALUE="[2]" />
-                <P VAR="v" VALUE="[2]" />
-                <P VAR="w" VALUE="[2]" />
-                <P VAR="p" VALUE="[2]" />
+                <P VAR="u" VALUE="[2]"/>
+                <P VAR="v" VALUE="[2]"/>
+                <P VAR="w" VALUE="[2]"/>
+                <P VAR="p" VALUE="[2]"/>
             </REGION>
             <REGION REF="4">
-                <D VAR="u" VALUE="uInf" />
-                <D VAR="v" VALUE="vInf" />
-                <D VAR="w" VALUE="0" />
-                <N VAR="p" USERDEFINEDTYPE="H" VALUE="0" />
+                <D VAR="u" VALUE="uInf"/>
+                <D VAR="v" VALUE="vInf"/>
+                <D VAR="w" VALUE="0"/>
+                <N VAR="p" USERDEFINEDTYPE="H" VALUE="0"/>
             </REGION>
             <REGION REF="5">
-                <D VAR="u" VALUE="0" />
-                <D VAR="v" VALUE="0" />
-                <D VAR="w" VALUE="0" />
-                <N VAR="p" USERDEFINEDTYPE="H" VALUE="0" />
+                <D VAR="u" VALUE="0"/>
+                <D VAR="v" VALUE="0"/>
+                <D VAR="w" VALUE="0"/>
+                <N VAR="p" USERDEFINEDTYPE="H" VALUE="0"/>
             </REGION>
             <REGION REF="6">
-                <D VAR="u" VALUE="0" />
-                <D VAR="v" VALUE="0" />
-                <D VAR="w" VALUE="0" />
-                <N VAR="p" USERDEFINEDTYPE="H" VALUE="0" />
+                <D VAR="u" VALUE="0"/>
+                <D VAR="v" VALUE="0"/>
+                <D VAR="w" VALUE="0"/>
+                <N VAR="p" USERDEFINEDTYPE="H" VALUE="0"/>
             </REGION>
         </BOUNDARYCONDITIONS>
         <FUNCTION NAME="InitialConditions">
-            <E VAR="u" VALUE="uInf" />
-            <E VAR="v" VALUE="vInf" />
-            <E VAR="w" VALUE="0" />
-            <E VAR="p" VALUE="0" />
+            <E VAR="u" VALUE="uInf"/>
+            <E VAR="v" VALUE="vInf"/>
+            <E VAR="w" VALUE="0"/>
+            <E VAR="p" VALUE="0"/>
         </FUNCTION>
     </CONDITIONS>
     <FILTERS>

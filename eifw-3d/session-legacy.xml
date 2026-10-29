@@ -8,13 +8,11 @@
     </EXPANSIONS>
     <CONDITIONS>
         <SOLVERINFO>
-            <I PROPERTY="SolverType" VALUE="VelocityCorrectionScheme"/>
-            <I PROPERTY="EQTYPE" VALUE="UnsteadyNavierStokes"/>
             <I PROPERTY="Projection" VALUE="Galerkin"/>
+            <I PROPERTY="EQTYPE" VALUE="UnsteadyNavierStokes"/>
+            <I PROPERTY="SolverType" VALUE="VelocityCorrectionScheme"/>
             <I PROPERTY="SPECTRALHPDEALIASING" VALUE="True"/>
             <I PROPERTY="SpectralVanishingViscosity" VALUE="DGKernel"/>
-            <I PROPERTY="EvolutionOperator" VALUE="Nonlinear"/>
-            <I PROPERTY="Driver" VALUE="Standard"/>
         </SOLVERINFO>
         <GLOBALSYSSOLNINFO>
             <V VAR="u,v,w">
