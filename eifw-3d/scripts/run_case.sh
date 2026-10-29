@@ -20,8 +20,8 @@ done
 [[ "$solver" == legacy || "$solver" == redesign ]] || { echo 'Use --solver legacy|redesign' >&2; exit 2; }
 [[ "$formulation" == semiimplicit ]] || { echo 'Use --formulation semiimplicit' >&2; exit 2; }
 [[ "$np" =~ ^[1-9][0-9]*$ && "$steps" =~ ^[1-9][0-9]*$ ]] || { echo 'Supply positive --np N and --steps N' >&2; exit 2; }
-[[ -f "$source_root/mesh/eifw-3d.xml" && -f "$source_root/restart_ctu_306.fld/Info.xml" ]] || {
-    echo "Missing mesh or CTU 306 restart under $source_root" >&2; exit 1;
+[[ -f "$source_root/mesh/eifw-3d.xml" && -f "$source_root/restart_ctu_386.fld" ]] || {
+    echo "Missing mesh or CTU 386 restart under $source_root" >&2; exit 1;
 }
 if [[ "$solver" == legacy ]]; then
     bin="${NEKTAR_LEGACY_BIN:-}"; extra=(); label="legacy-$formulation"
@@ -45,9 +45,9 @@ outdir="$(cd "$outdir" && pwd)"
 for file in run.log run.err total.fce mainplane.fce flap1.fce flap2.fce; do
     [[ ! -e "$outdir/$file" ]] || { echo "Existing $outdir/$file; choose a clean output directory" >&2; exit 1; }
 done
-for item in eifw-3d.xml restart_ctu_306.fld; do
+for item in eifw-3d.xml restart_ctu_386.fld; do
     if [[ "$item" == eifw-3d.xml ]]; then target="$(realpath "$source_root/mesh/eifw-3d.xml")";
-    else target="$(realpath "$source_root/restart_ctu_306.fld")"; fi
+    else target="$(realpath "$source_root/restart_ctu_386.fld")"; fi
     if [[ -L "$outdir/$item" ]]; then
         [[ "$(realpath "$outdir/$item")" == "$target" ]] || { echo "Wrong link: $outdir/$item" >&2; exit 1; }
     elif [[ -e "$outdir/$item" ]]; then

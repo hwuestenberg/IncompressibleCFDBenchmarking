@@ -20,7 +20,7 @@ def main():
     args = parser.parse_args()
     case = Path(__file__).resolve().parent.parent
     mesh = args.source/'mesh/eifw-3d.xml'
-    restart = args.source/'restart_ctu_306.fld'
+    restart = args.source/'restart_ctu_386.fld'
     try:
         composites = set()
         with mesh.open() as source:
@@ -32,13 +32,9 @@ def main():
                     break
         if not {0, 2, *range(3, 13)} <= composites:
             raise ValueError(f'Mesh composites incomplete: {sorted(composites)}')
-        info = ET.parse(restart/'Info.xml').getroot()
-        partitions = info.findall('Partition')
-        if len(partitions) != 128:
-            raise ValueError(f'Expected 128 restart partitions, found {len(partitions)}')
-        for part in partitions:
-            if not (restart/part.get('FileName')).is_file():
-                raise ValueError(f'Missing restart partition: {part.get("FileName")}')
+        with restart.open('rb') as source:
+            if source.read(8) != b'\x89HDF\r\n\x1a\n':
+                raise ValueError(f'{restart.name} is not an HDF5 field file')
         baseline = None
         for path in (case/'session-legacy.xml', case/'session-redesign.xml'):
             root = ET.parse(path).getroot()
@@ -63,7 +59,7 @@ def main():
                 if not ids(values['Boundary'], 'B') <= set(regions):
                     raise ValueError(f'{path.name}: force filter references unknown boundary')
             initial = conditions.find("./FUNCTION[@NAME='InitialConditions']/F")
-            if initial is None or initial.get('FILE') != 'restart_ctu_306.fld':
+            if initial is None or initial.get('FILE') != 'restart_ctu_386.fld':
                 raise ValueError(f'{path.name}: wrong restart reference')
             physical = tuple(ET.tostring(root.find(tag)) for tag in (
                 'EXPANSIONS', './CONDITIONS/PARAMETERS', './CONDITIONS/VARIABLES',
@@ -74,7 +70,7 @@ def main():
             elif physical != baseline:
                 raise ValueError(f'{path.name}: physical setup differs from the other sessions')
             print(f'{path.name}: composites, boundary conditions, forces, and restart valid')
-        print(f'Mesh: {len(composites)} composites; restart: {len(partitions)} partitions at time {info.findtext("./Metadata/Time")}')
+        print(f'Mesh: {len(composites)} composites; restart: HDF5, {restart.stat().st_size / 2**30:.2f} GiB')
     except (OSError, ET.ParseError, ValueError, KeyError) as exc:
         parser.exit(1, f'error: {exc}\n')
 
