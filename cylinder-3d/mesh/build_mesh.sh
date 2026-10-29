@@ -18,15 +18,15 @@
 #   NEKMESH_BIN path to the NekMesh executable (see scripts/env.sh.example)
 #
 # Usage:
-#   ./build_mesh.sh                       # defaults: Lz=4.0, 40 layers
-#   LZ=6.0 LAYERS=48 ./build_mesh.sh       # override spanwise length/layers
+#   ./mesh/build_mesh.sh                       # defaults: Lz=4.0, 40 layers
+#   LZ=6.0 LAYERS=48 ./mesh/build_mesh.sh       # override spanwise length/layers
 
 set -euo pipefail
 
 : "${GMSH_BIN:?Set GMSH_BIN to the path of the gmsh executable}"
 : "${NEKMESH_BIN:?Set NEKMESH_BIN to the path of the NekMesh executable}"
 
-mesh_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/mesh"
+mesh_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 mkdir -p "$mesh_dir"
 GEO_FILE="${GEO_FILE:-$mesh_dir/cylinder-3d.geo}"
 MSH_FILE="${MSH_FILE:-$mesh_dir/cylinder-3d.msh}"
@@ -40,9 +40,11 @@ echo "Meshing $GEO_FILE -> $MSH_FILE (Lz=$LZ, layers=$LAYERS)"
 
 echo "Converting $MSH_FILE -> $XML_FILE"
 "$NEKMESH_BIN" "$MSH_FILE" "$XML_FILE:xml:uncompress"
+"$mesh_dir/../../scripts/convert_mesh_to_hdf5.sh" "$XML_FILE"
 
 echo
 echo "Done: $XML_FILE"
+echo "HDF5 pair: ${XML_FILE%.xml}-hdf5.xml and ${XML_FILE%.xml}-hdf5.nekg"
 echo "If LZ was overridden from the default 4.0, update the Lz PARAMETER"
 echo "in session-redesign.xml / session-legacy.xml to match (it controls"
 echo "the initial-condition perturbation wavelength, not the mesh)."

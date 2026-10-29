@@ -111,7 +111,7 @@ def main():
                     help="Spanwise length Lz -- divides forces by span to "
                          "get per-unit-span coefficients (match the Lz "
                          "PARAMETER in session-legacy.xml / "
-                         "session-redesign.xml, or ../build_mesh.sh's "
+                         "session-redesign.xml, or ../mesh/build_mesh.sh's "
                          "LZ override if you changed it)")
     p.add_argument("--rho", type=float, default=1.0)
     p.add_argument("--U", type=float, default=1.0)

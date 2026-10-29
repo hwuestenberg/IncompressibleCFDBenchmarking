@@ -25,16 +25,20 @@ export GMSH_BIN="$(command -v gmsh)"
 export NEKMESH_BIN="$PWD/scripts/nekmesh-docker.sh"
 ```
 
-Run the build script in the desired case directory; each script supplies its own Gmsh dimension and any NekMesh periodic alignment:
+Run the build script in the desired case directory; each script supplies its own Gmsh dimension and any NekMesh periodic alignment, then converts the final XML mesh to HDF5:
 
 ```sh
-(cd cylinder-2d && ./build_mesh_2d.sh)
-(cd cylinder-3d && ./build_mesh.sh)
-(cd channel-3d && ./build_mesh.sh)
-(cd tgv-3d && ./build_mesh.sh)
+(cd cylinder-2d && ./mesh/build_mesh.sh)
+(cd cylinder-3d && ./mesh/build_mesh.sh)
+(cd channel-3d && ./mesh/build_mesh.sh)
+(cd tgv-3d && ./mesh/build_mesh.sh)
 ```
 
 For a local NekMesh installation, set `NEKMESH_BIN` to its executable path instead. Other cases use an included mesh or require one to be placed in `mesh/`, as stated in their case READMEs.
+
+To convert all XML meshes already present, including the supplied NACA0012 2D and eIFW 2D meshes, run `./scripts/convert_meshes_to_hdf5.sh` from the repository root. It skips cases whose XML mesh has not been generated or staged yet. To convert a single mesh, use `./scripts/convert_mesh_to_hdf5.sh case/mesh/case.xml` (or pass an explicit output stem). For eIFW 3D, the bulk command accepts either `mesh/eifw-3d.xml` or the locally staged `mesh/mesh.xml`.
+
+NekMesh writes an HDF5 `.nekg` file **and** a small companion `-hdf5.xml` file. Stage both files in the solver's working directory: the companion refers to the `.nekg` by its basename. The current case runners continue to use their XML mesh; the HDF5 pair is available for runs with a solver built with HDF5 support after validating that its mesh geometry and boundary mappings match the XML input. [Nektar++ documents this format and conversion](https://doc.nektar.info/userguide/5.8.0/user-guidese19.html).
 
 Each case stores its primary geometry and final mesh in `mesh/` with the case directory name as the filename stem (for example, `cylinder-3d/mesh/cylinder-3d.geo` and `cylinder-3d/mesh/cylinder-3d.xml`). Each case README gives the input and run commands. Case runners accept `--np` for MPI ranks and use `NEKTAR_LEGACY_BIN` and `NEKTAR_REDESIGN_BIN` for solver paths; set `NEKTAR_REDESIGN_DEVICE_BIN` when Device needs a separate build. Run a single leg when measuring one solver, or both legs under matching physics when comparing outputs. For performance, wrap each run command with `time` and record the solver commit/build, MPI ranks, execution space, time step, step count, wall time and hardware. Compare runs at the same workload and report CPU and GPU resource counts separately. Use compute nodes for large 3D cases. A comparison is a result only after the runs and their post-processing finish.
 

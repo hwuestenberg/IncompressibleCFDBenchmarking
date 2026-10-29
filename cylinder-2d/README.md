@@ -3,10 +3,10 @@
 At Re=100, compare mean drag, lift amplitude and Strouhal number with the Schäfer–Turek benchmark, or time either solver at the same workload. The geometry is included in `mesh/`. Follow the [shared mesh setup](../README.md#mesh-generation), then build from `cylinder-2d/`:
 
 ```sh
-./build_mesh_2d.sh
+./mesh/build_mesh.sh
 ```
 
-The generated `mesh/cylinder-2d.xml` is the input for both sessions. Set solver paths and run:
+The build also writes `mesh/cylinder-2d-hdf5.xml` and `mesh/cylinder-2d-hdf5.nekg`. The generated `mesh/cylinder-2d.xml` is the input for both current runners. Set solver paths and run:
 
 ```sh
 cp scripts/env.sh.example scripts/env.sh  # edit paths, then source it

@@ -9,7 +9,7 @@
 #   NEKMESH_BIN path to the NekMesh executable (see scripts/env.sh.example)
 #
 # Usage:
-#   ./build_mesh_2d.sh
+#   ./mesh/build_mesh.sh  (from the case directory)
 #
 # The gmsh Physical Surface/Curve tags in the .geo become Nektar++
 # composite IDs directly on conversion, and already match what
@@ -23,7 +23,7 @@ set -euo pipefail
 : "${GMSH_BIN:?Set GMSH_BIN to the path of the gmsh executable}"
 : "${NEKMESH_BIN:?Set NEKMESH_BIN to the path of the NekMesh executable}"
 
-mesh_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/mesh"
+mesh_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 mkdir -p "$mesh_dir"
 SOURCE_GEO="${SOURCE_GEO:-$mesh_dir/cylinder-2d.geo}"
 MSH_FILE="${MSH_FILE:-$mesh_dir/cylinder-2d.msh}"
@@ -39,8 +39,10 @@ echo "Meshing $SOURCE_GEO -> $MSH_FILE"
 
 echo "Converting $MSH_FILE -> $XML_FILE"
 "$NEKMESH_BIN" "$MSH_FILE" "$XML_FILE:xml:uncompress"
+"$mesh_dir/../../scripts/convert_mesh_to_hdf5.sh" "$XML_FILE"
 
 echo
 echo "Done: $XML_FILE"
+echo "HDF5 pair: ${XML_FILE%.xml}-hdf5.xml and ${XML_FILE%.xml}-hdf5.nekg"
 echo "Sanity check element/composite counts, e.g.:"
 echo "  grep -c '<Q ID=' \"$XML_FILE\"   # expect 2880 quads"

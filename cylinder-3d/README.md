@@ -3,7 +3,7 @@
 At Re=300, compare the 3D wake forces and shedding frequency between solvers, or time either solver. No fixed literature acceptance range is supplied. The included `mesh/cylinder-3d.geo` is built using the [shared mesh setup](../README.md#mesh-generation); the build writes the mesh into `mesh/`. From this directory:
 
 ```sh
-./build_mesh.sh
+./mesh/build_mesh.sh
 cp scripts/env.sh.example scripts/env.sh  # edit paths, then source it
 source scripts/env.sh
 scripts/run_case.sh --solver legacy --np 1 --outdir results/legacy

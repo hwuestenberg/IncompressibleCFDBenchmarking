@@ -46,7 +46,7 @@ esac
 
 mesh="$CASE_ROOT/mesh/tgv-3d.xml"
 [ -f "$mesh" ] || {
-    echo "Missing $mesh -- build it first with $CASE_ROOT/build_mesh.sh" >&2
+    echo "Missing $mesh -- build it first with $CASE_ROOT/mesh/build_mesh.sh" >&2
     exit 1
 }
 

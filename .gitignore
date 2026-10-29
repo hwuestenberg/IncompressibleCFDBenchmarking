@@ -12,6 +12,7 @@
 *.fld
 *.fld/
 *.nekg
+*-hdf5.xml
 *.msh
 *-raw.xml
 /channel-3d/mesh/channel-3d.xml

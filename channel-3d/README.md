@@ -3,7 +3,7 @@
 This case targets mean velocity and Reynolds-stress profiles at Reτ=180 and measures solver cost. Follow the [shared mesh setup](../README.md#mesh-generation). From `channel-3d/`, build the mesh into `mesh/` and run either or both semi-implicit legs:
 
 ```sh
-./build_mesh.sh
+./mesh/build_mesh.sh
 cp scripts/env.sh.example scripts/env.sh  # edit paths, then source it
 source scripts/env.sh
 scripts/run_case.sh --solver legacy --np 1 --outdir results/legacy

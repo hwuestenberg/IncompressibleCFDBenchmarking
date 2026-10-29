@@ -6,7 +6,7 @@ set -euo pipefail
 : "${GMSH_BIN:?Set GMSH_BIN to the path of the gmsh executable}"
 : "${NEKMESH_BIN:?Set NEKMESH_BIN to the path of the NekMesh executable}"
 
-mesh_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/mesh"
+mesh_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 mkdir -p "$mesh_dir"
 GEO_FILE="${GEO_FILE:-$mesh_dir/tgv-3d.geo}"
 N="${N:-64}"
@@ -26,9 +26,11 @@ echo "Pairing x/y/z faces as periodic -> $XML_FILE"
     -m peralign:surf1=5:surf2=3:dir=x \
     -m peralign:surf1=2:surf2=4:dir=y \
     "$RAW_XML" "$XML_FILE:xml:uncompress"
+"$mesh_dir/../../scripts/convert_mesh_to_hdf5.sh" "$XML_FILE"
 
 echo
 echo "Done: $XML_FILE"
+echo "HDF5 pair: ${XML_FILE%.xml}-hdf5.xml and ${XML_FILE%.xml}-hdf5.nekg"
 echo "The runner uses mesh/tgv-3d.xml; the default case uses N=64."
 echo "Sanity check, e.g.:"
 echo "  grep -c '<H ID=' \"$XML_FILE\"   # expect $((N*N*N)) hexahedra"

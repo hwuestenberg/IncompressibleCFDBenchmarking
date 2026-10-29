@@ -3,7 +3,7 @@
 At Re=1600, compare kinetic-energy dissipation with the included reference curve and time either solver. Follow the [shared mesh setup](../README.md#mesh-generation); the build writes the mesh into `mesh/`. From this directory:
 
 ```sh
-./build_mesh.sh
+./mesh/build_mesh.sh
 cp scripts/env.sh.example scripts/env.sh  # edit paths, then source it
 source scripts/env.sh
 scripts/run_case.sh --solver legacy --np 1 --outdir results/legacy
